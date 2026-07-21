@@ -26,77 +26,104 @@
   <div class="container">
     
     <!-- ========== CABEÇALHO ========== -->
+    <!-- Para trocar a foto/logo: substitua o arquivo assets/avatar.svg ou mude o src abaixo -->
     <header class="header">
       <img src="assets/avatar.svg" alt="Avatar" class="avatar" width="96" height="96">
+      <!-- ↓ NOME DA PÁGINA: edite o texto abaixo para mudar o título ↓ -->
       <h1 class="brand-name">Meus Links</h1>
+      <!-- ↓ DESCRIÇÃO: edite o texto abaixo para mudar a bio ↓ -->
       <p class="brand-description">As melhores ofertas de produtos selecionados para você!</p>
     </header>
     <!-- ================================ -->
 
     <!-- ========== SEUS LINKS AQUI ========== -->
+    <!--
+      COMO ADICIONAR UM NOVO LINK:
+      1. Copie um bloco <a>...</a> abaixo
+      2. Cole antes do comentário "FIM DOS LINKS"
+      3. Troque:
+         - href="..."        → coloque a URL do produto
+         - class="link-btn X" → troque X pela loja: shopee, mercado-livre ou amazon
+         - <span class="link-text">...</span> → coloque o nome do produto
+
+      COMO REMOVER UM LINK:
+      - Delete o bloco <a>...</a> inteiro do link que quer remover
+    -->
     <section class="links" aria-label="Links de produtos">
       
       <!-- SHOPEE -->
       <a href="https://shopee.com.br" target="_blank" rel="noopener noreferrer" class="link-btn shopee">
+        <!-- ↑ href: coloque a URL do produto aqui ↑ -->
         <span class="link-icon">
           <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
             <path d="M12 2C9.243 2 7 4.243 7 7h2c0-1.654 1.346-3 3-3s3 1.346 3 3h2c0-2.757-2.243-5-5-5zm-5.5 7a1.5 1.5 0 0 0-1.5 1.5v9A2.5 2.5 0 0 0 7.5 22h9a2.5 2.5 0 0 0 2.5-2.5v-9A1.5 1.5 0 0 0 17.5 9h-11zm2 4.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5zm5 0c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5z"/>
           </svg>
         </span>
+        <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
         <span class="link-text">Fone Bluetooth com Cancelamento de Ruído</span>
       </a>
 
       <a href="https://shopee.com.br" target="_blank" rel="noopener noreferrer" class="link-btn shopee">
+        <!-- ↑ href: coloque a URL do produto aqui ↑ -->
         <span class="link-icon">
           <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
             <path d="M12 2C9.243 2 7 4.243 7 7h2c0-1.654 1.346-3 3-3s3 1.346 3 3h2c0-2.757-2.243-5-5-5zm-5.5 7a1.5 1.5 0 0 0-1.5 1.5v9A2.5 2.5 0 0 0 7.5 22h9a2.5 2.5 0 0 0 2.5-2.5v-9A1.5 1.5 0 0 0 17.5 9h-11zm2 4.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5zm5 0c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5z"/>
           </svg>
         </span>
+        <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
         <span class="link-text">Carregador Portátil 20000mAh</span>
       </a>
 
       <!-- MERCADO LIVRE -->
       <a href="https://mercadolivre.com.br" target="_blank" rel="noopener noreferrer" class="link-btn mercado-livre">
+        <!-- ↑ href: coloque a URL do produto aqui ↑ -->
         <span class="link-icon">
           <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
             <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3c1.243 0 2.387.402 3.32 1.08L12 9.4l-3.32-3.32A6.962 6.962 0 0 1 12 5zM5 12c0-1.243.402-2.387 1.08-3.32L9.4 12l-3.32 3.32A6.962 6.962 0 0 1 5 12zm7 7a6.962 6.962 0 0 1-3.32-1.08L12 14.6l3.32 3.32A6.962 6.962 0 0 1 12 19zm0-5.4L8.68 10.28 12 6.96l3.32 3.32L12 13.6zm5.92 1.72L14.6 12l3.32-3.32A6.962 6.962 0 0 1 19 12c0 1.243-.402 2.387-1.08 3.32z"/>
           </svg>
         </span>
+        <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
         <span class="link-text">Smart TV 50" 4K UHD</span>
       </a>
 
       <a href="https://mercadolivre.com.br" target="_blank" rel="noopener noreferrer" class="link-btn mercado-livre">
+        <!-- ↑ href: coloque a URL do produto aqui ↑ -->
         <span class="link-icon">
           <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
             <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3c1.243 0 2.387.402 3.32 1.08L12 9.4l-3.32-3.32A6.962 6.962 0 0 1 12 5zM5 12c0-1.243.402-2.387 1.08-3.32L9.4 12l-3.32 3.32A6.962 6.962 0 0 1 5 12zm7 7a6.962 6.962 0 0 1-3.32-1.08L12 14.6l3.32 3.32A6.962 6.962 0 0 1 12 19zm0-5.4L8.68 10.28 12 6.96l3.32 3.32L12 13.6zm5.92 1.72L14.6 12l3.32-3.32A6.962 6.962 0 0 1 19 12c0 1.243-.402 2.387-1.08 3.32z"/>
           </svg>
         </span>
+        <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
         <span class="link-text">Aspirador Robô com Mapeamento</span>
       </a>
 
       <!-- AMAZON -->
       <a href="https://amazon.com.br" target="_blank" rel="noopener noreferrer" class="link-btn amazon">
+        <!-- ↑ href: coloque a URL do produto aqui ↑ -->
         <span class="link-icon">
           <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
             <path d="M14.463 13.831c-1.753 1.294-4.291 1.981-6.478 1.981-3.066 0-5.827-1.134-7.917-3.02-.164-.148-.018-.35.18-.235 2.257 1.313 5.046 2.104 7.928 2.104 1.944 0 4.082-.403 6.05-1.236.297-.126.546.195.237.406zm.678-.772c-.224-.287-1.481-.136-2.046-.069-.172.02-.198-.129-.043-.236 1.001-.704 2.645-.501 2.836-.265.191.238-.05 1.885-.99 2.672-.145.121-.283.057-.218-.104.212-.527.687-1.71.461-1.998z"/>
             <path d="M12.003 2C6.479 2 2 6.479 2 12.003c0 5.523 4.479 10.002 10.003 10.002 5.523 0 10.002-4.479 10.002-10.002C22.005 6.479 17.526 2 12.003 2zm4.081 14.424c-.199.149-.389.07-.283-.172.31-.775.998-2.514.674-2.926-.323-.413-2.142-.196-2.96.069-.248.08-.287-.186-.039-.343 1.449-1.018 3.826-.725 4.103-.384.278.343-.073 2.726-1.495 3.756zm-1.613-2.534c-2.337 1.721-5.724 2.644-8.638 2.644-4.088 0-7.768-1.512-10.553-4.027-.219-.198-.023-.467.24-.314 3.007 1.75 6.726 2.804 10.567 2.804 2.59 0 5.44-.537 8.064-1.648.395-.17.728.26.32.541z"/>
           </svg>
         </span>
+        <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
         <span class="link-text">Kindle Paperwhite 11ª Geração</span>
       </a>
 
       <a href="https://amazon.com.br" target="_blank" rel="noopener noreferrer" class="link-btn amazon">
+        <!-- ↑ href: coloque a URL do produto aqui ↑ -->
         <span class="link-icon">
           <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
             <path d="M14.463 13.831c-1.753 1.294-4.291 1.981-6.478 1.981-3.066 0-5.827-1.134-7.917-3.02-.164-.148-.018-.35.18-.235 2.257 1.313 5.046 2.104 7.928 2.104 1.944 0 4.082-.403 6.05-1.236.297-.126.546.195.237.406zm.678-.772c-.224-.287-1.481-.136-2.046-.069-.172.02-.198-.129-.043-.236 1.001-.704 2.645-.501 2.836-.265.191.238-.05 1.885-.99 2.672-.145.121-.283.057-.218-.104.212-.527.687-1.71.461-1.998z"/>
             <path d="M12.003 2C6.479 2 2 6.479 2 12.003c0 5.523 4.479 10.002 10.003 10.002 5.523 0 10.002-4.479 10.002-10.002C22.005 6.479 17.526 2 12.003 2zm4.081 14.424c-.199.149-.389.07-.283-.172.31-.775.998-2.514.674-2.926-.323-.413-2.142-.196-2.96.069-.248.08-.287-.186-.039-.343 1.449-1.018 3.826-.725 4.103-.384.278.343-.073 2.726-1.495 3.756zm-1.613-2.534c-2.337 1.721-5.724 2.644-8.638 2.644-4.088 0-7.768-1.512-10.553-4.027-.219-.198-.023-.467.24-.314 3.007 1.75 6.726 2.804 10.567 2.804 2.59 0 5.44-.537 8.064-1.648.395-.17.728.26.32.541z"/>
           </svg>
         </span>
+        <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
         <span class="link-text">Echo Dot 5ª Geração com Alexa</span>
       </a>
 
-      <!-- Copie um bloco <a> acima para adicionar mais links.
-           Troque: href (URL do produto), class (shopee/mercado-livre/amazon), e o texto em .link-text -->
+      <!-- ========== FIM DOS LINKS ========== -->
+      <!-- Para adicionar mais links, copie um bloco <a>...</a> acima e cole aqui em cima -->
       
     </section>
     <!-- ===================================== -->

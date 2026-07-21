@@ -1,12 +1,12 @@
 /* ========== VARIÁVEIS CSS ========== */
 :root {
-  --color-primary: #6c5ce7;
-  --color-background: #f8f9fa;
-  --color-text: #2d3436;
-  --color-text-light: #636e72;
-  --color-card: #ffffff;
-  --color-shadow: rgba(0, 0, 0, 0.08);
-  --color-shadow-hover: rgba(0, 0, 0, 0.15);
+  --color-primary: #a78bfa;
+  --color-background: #1a1a2e;
+  --color-text: #e2e8f0;
+  --color-text-light: #94a3b8;
+  --color-card: #16213e;
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-shadow-hover: rgba(0, 0, 0, 0.5);
 
   /* Cores por loja */
   --color-shopee: #ee4d2d;
@@ -173,7 +173,7 @@ body {
   text-align: center;
   margin-top: 2.5rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .footer p {
