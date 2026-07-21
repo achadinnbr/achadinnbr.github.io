@@ -80,14 +80,21 @@ body {
 
 .brand-handle {
   display: inline-block;
-  font-size: 0.85rem;
-  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text-light);
   text-decoration: none;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding: 0.3rem 0.75rem;
+  background-color: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  border-radius: 50px;
+  transition: background-color 0.2s ease;
 }
 
 .brand-handle:hover {
-  text-decoration: underline;
+  background-color: rgba(167, 139, 250, 0.2);
+  text-decoration: none;
 }
 
 .brand-description {
