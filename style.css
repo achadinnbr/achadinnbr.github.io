@@ -84,6 +84,33 @@ body {
   margin: 0 auto;
 }
 
+/* ========== BUSCADOR ========== */
+.search-box {
+  margin-bottom: 1.5rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  font-family: var(--font-family);
+  font-size: var(--font-size-btn);
+  color: var(--color-text);
+  background-color: var(--color-card);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px var(--color-shadow);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: var(--color-text-light);
+}
+
+.search-input:focus {
+  border-color: var(--color-primary);
+}
+
 /* ========== LINKS / BOTÕES ========== */
 .links {
   display: flex;

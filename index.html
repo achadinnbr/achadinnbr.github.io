@@ -36,6 +36,13 @@
     </header>
     <!-- ================================ -->
 
+    <!-- ========== BUSCADOR ========== -->
+    <!-- O campo abaixo filtra os links em tempo real pelo código ou nome -->
+    <div class="search-box">
+      <input type="text" id="search" class="search-input" placeholder="Buscar por código ou nome..." aria-label="Buscar links">
+    </div>
+    <!-- =============================== -->
+
     <!-- ========== SEUS LINKS AQUI ========== -->
     <!--
       COMO ADICIONAR UM NOVO LINK:
@@ -44,7 +51,7 @@
       3. Troque:
          - href="..."        → coloque a URL do produto
          - class="link-btn X" → troque X pela loja: shopee, mercado-livre ou amazon
-         - <span class="link-text">...</span> → coloque o nome do produto
+         - <span class="link-text">...</span> → coloque o nome do produto (inclua um código tipo #001 para facilitar a busca)
 
       COMO REMOVER UM LINK:
       - Delete o bloco <a>...</a> inteiro do link que quer remover
@@ -60,7 +67,7 @@
           </svg>
         </span>
         <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
-        <span class="link-text">Fone Bluetooth com Cancelamento de Ruído</span>
+        <span class="link-text">#001 - Fone Bluetooth com Cancelamento de Ruído</span>
       </a>
 
       <a href="https://shopee.com.br" target="_blank" rel="noopener noreferrer" class="link-btn shopee">
@@ -71,7 +78,7 @@
           </svg>
         </span>
         <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
-        <span class="link-text">Carregador Portátil 20000mAh</span>
+        <span class="link-text">#002 - Carregador Portátil 20000mAh</span>
       </a>
 
       <!-- MERCADO LIVRE -->
@@ -83,7 +90,7 @@
           </svg>
         </span>
         <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
-        <span class="link-text">Smart TV 50" 4K UHD</span>
+        <span class="link-text">#003 - Smart TV 50" 4K UHD</span>
       </a>
 
       <a href="https://mercadolivre.com.br" target="_blank" rel="noopener noreferrer" class="link-btn mercado-livre">
@@ -94,7 +101,7 @@
           </svg>
         </span>
         <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
-        <span class="link-text">Aspirador Robô com Mapeamento</span>
+        <span class="link-text">#004 - Aspirador Robô com Mapeamento</span>
       </a>
 
       <!-- AMAZON -->
@@ -107,7 +114,7 @@
           </svg>
         </span>
         <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
-        <span class="link-text">Kindle Paperwhite 11ª Geração</span>
+        <span class="link-text">#005 - Kindle Paperwhite 11ª Geração</span>
       </a>
 
       <a href="https://amazon.com.br" target="_blank" rel="noopener noreferrer" class="link-btn amazon">
@@ -119,7 +126,7 @@
           </svg>
         </span>
         <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
-        <span class="link-text">Echo Dot 5ª Geração com Alexa</span>
+        <span class="link-text">#006 - Echo Dot 5ª Geração com Alexa</span>
       </a>
 
       <!-- ========== FIM DOS LINKS ========== -->
@@ -133,5 +140,19 @@
     </footer>
 
   </div>
+
+  <!-- ========== SCRIPT DE BUSCA ========== -->
+  <!-- Filtra os links em tempo real conforme o usuário digita -->
+  <script>
+    document.getElementById('search').addEventListener('input', function () {
+      var termo = this.value.toLowerCase();
+      var links = document.querySelectorAll('.link-btn');
+      links.forEach(function (link) {
+        var texto = link.querySelector('.link-text').textContent.toLowerCase();
+        link.style.display = texto.includes(termo) ? '' : 'none';
+      });
+    });
+  </script>
+  <!-- ====================================== -->
 </body>
 </html>
