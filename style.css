@@ -204,23 +204,22 @@ body {
 }
 
 .link-btn.shopee .link-icon {
-  color: var(--color-shopee);
+  background-color: var(--color-background);
 }
 
 .link-btn.mercado-livre .link-icon {
-  color: var(--color-mercado-livre-text);
-  background-color: var(--color-mercado-livre);
+  background-color: var(--color-background);
 }
 
 .link-btn.amazon .link-icon {
-  color: var(--color-amazon);
+  background-color: var(--color-background);
 }
 
 .link-icon svg,
 .link-icon img {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 50%;
 }
 
