@@ -1,107 +1,90 @@
-# Meus Links - Página de Ofertas (Estilo Linktree)
+# Achadin BR - Página de Links de Afiliados
 
-Página estática, rápida e responsiva para divulgar links de produtos de e-commerce (Shopee, Mercado Livre, Amazon).
+Página estática e responsiva para divulgar links de produtos (Shopee, Mercado Livre, Amazon), gerada automaticamente a partir do Notion.
 
-**Geração automática a partir do Notion. Edite pelo celular, a página atualiza sozinha.**
+**Edite pelo celular no Notion → a página atualiza sozinha via GitHub Actions.**
 
 ---
 
 ## Como Funciona
 
 1. Você cadastra/edita produtos na **Tabela de Produtos** no Notion (funciona pelo app do celular)
-2. O GitHub Actions roda o script de build automaticamente (a cada 1h ou manualmente)
+2. O GitHub Actions roda o script de build (a cada 1h ou manualmente)
 3. O script consulta a API do Notion, filtra produtos com status "Publicado" e gera o `index.html`
-4. A página no GitHub Pages é atualizada
+4. O GitHub Pages serve a página atualizada
+
+---
+
+## Gerenciar Produtos (via Notion)
+
+Toda gestão é feita pela **Tabela de Produtos** no Notion:
+
+| Ação | Como fazer |
+|------|-----------|
+| Adicionar produto | Crie uma linha nova com Código, Nome, Plataforma, Link e Status = "Publicado" |
+| Remover da página | Mude o Status para qualquer opção diferente de "Publicado" |
+| Alterar plataforma | Mude o campo "Plataforma" (Shopee, Mercado Livre, Amazon) |
+| Mudar ordem | Altere o campo "Código" (#001, #002...) — ordena ascendente |
+| Deletar permanente | Delete a linha da tabela |
+
+Após editar, [dispare o build manualmente](https://github.com/achadinnbr/achadinnbr.github.io/actions/workflows/build.yml) ou aguarde o cron (a cada 1h).
 
 ---
 
 ## Automação (Notion → GitHub Pages)
 
-### Configurar Secrets no GitHub
+### Secrets configurados no GitHub
 
-No repositório, vá em **Settings → Secrets and variables → Actions** e adicione:
+Em **Settings → Secrets and variables → Actions**:
 
-| Secret | Valor |
-|--------|-------|
-| `NOTION_API_TOKEN` | Seu token da integração Notion |
-| `NOTION_DATABASE_ID` | `3b2ed71f-e785-805e-b1f0-daa161ac46d0` |
+| Secret | Descrição |
+|--------|-----------|
+| `NOTION_API_TOKEN` | Token da integração Notion |
+| `NOTION_DATABASE_ID` | ID da database "Tabela de Produtos" |
 
 ### Disparar o build
 
 - **Automático:** roda a cada 1 hora via cron
 - **Manual:** vá em **Actions → Build from Notion → Run workflow**
 
-### Rodar localmente
+---
+
+## Rodar Localmente
+
+### Pré-requisitos
+
+- Node.js 20+
+- npm
+
+### Instalar dependências
 
 ```bash
 npm install
+```
+
+### Gerar a página a partir do Notion
+
+```bash
+# Linux / Mac
 NOTION_API_TOKEN=seu_token NOTION_DATABASE_ID=seu_db_id npm run build
 ```
 
-No PowerShell:
 ```powershell
+# PowerShell (Windows)
 $env:NOTION_API_TOKEN="seu_token"; $env:NOTION_DATABASE_ID="seu_db_id"; npm run build
 ```
 
----
+### Visualizar no navegador
 
-## Como Rodar Localmente
-
-Como é um projeto 100% estático, basta abrir o arquivo no navegador:
-
-### Opção 1: Abrir direto no navegador
-
-```bash
-# No terminal, dentro da pasta do projeto:
-start index.html
-```
-
-Ou simplesmente dê dois cliques no `index.html` no Explorer.
-
-### Opção 2: Live Server (VS Code)
-
-1. Instale a extensão [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
-2. Clique com botão direito no `index.html` → **Open with Live Server**
-3. Pronto! Qualquer alteração salva atualiza automaticamente no navegador.
-
-### Opção 3: Servidor local com Python
+Abra o `index.html` direto no navegador, use Live Server no VS Code, ou:
 
 ```bash
 python -m http.server 8080
 ```
 
-Acesse em `http://localhost:8080`
-
 ---
 
-## Como Usar
-
-1. Clone ou faça fork deste repositório
-2. Edite o `index.html` com seus links e informações
-3. Publique no GitHub Pages (gratuito)
-
----
-
-## Personalizar
-
-### Trocar nome e descrição
-
-No `index.html`, edite o `<header>`:
-
-```html
-<h1 class="brand-name">Seu Nome Aqui</h1>
-<p class="brand-description">Sua descrição aqui</p>
-```
-
-### Trocar avatar
-
-Substitua o arquivo `assets/avatar.svg` por sua imagem (PNG, JPG ou SVG). Recomendado: imagem quadrada de pelo menos 192x192px.
-
-Se usar outro formato, atualize o `src` no HTML:
-
-```html
-<img src="assets/sua-foto.png" alt="Avatar" class="avatar" width="96" height="96">
-```
+## Personalizar Visual
 
 ### Alterar cores
 
@@ -109,122 +92,29 @@ Edite as variáveis CSS no início do `style.css`:
 
 ```css
 :root {
-  --color-primary: #6c5ce7;     /* Cor principal (borda do avatar, links do footer) */
-  --color-background: #f8f9fa;  /* Fundo da página */
-  --color-text: #2d3436;        /* Cor do texto */
-  --color-card: #ffffff;        /* Fundo dos botões */
-  --color-shopee: #ee4d2d;      /* Cor da Shopee */
+  --color-primary: #a78bfa;       /* Cor principal */
+  --color-background: #1a1a2e;    /* Fundo da página */
+  --color-card: #16213e;          /* Fundo dos botões */
+  --color-shopee: #ee4d2d;        /* Cor da Shopee */
   --color-mercado-livre: #fff159; /* Cor do Mercado Livre */
-  --color-amazon: #ff9900;      /* Cor da Amazon */
+  --color-amazon: #ff9900;        /* Cor da Amazon */
 }
 ```
 
----
+### Trocar avatar
 
-## Adicionar / Remover Links
+Substitua o arquivo `assets/logo.jpeg` por sua imagem (quadrada, mínimo 192x192px).
 
-Abra `index.html` e localize a seção marcada com:
+### Adicionar nova loja
 
-```html
-<!-- ========== SEUS LINKS AQUI ========== -->
-```
-
-Para adicionar um novo link, copie o bloco abaixo e cole dentro da `<section class="links">`:
-
-```html
-<a href="URL_DO_PRODUTO" target="_blank" rel="noopener noreferrer" class="link-btn shopee">
-  <span class="link-icon">
-    <!-- Cole o SVG da loja aqui -->
-  </span>
-  <span class="link-text">Nome do Produto</span>
-</a>
-```
-
-**Substitua:**
-- `URL_DO_PRODUTO` → link do produto
-- `shopee` → classe da loja (`shopee`, `mercado-livre` ou `amazon`)
-- `Nome do Produto` → descrição do produto/oferta
-
-Para remover, basta deletar o bloco `<a>...</a>` correspondente.
-
----
-
-## Lojas Suportadas
-
-| Loja | Classe CSS | Cor |
-|------|-----------|-----|
-| Shopee | `shopee` | Laranja (#ee4d2d) |
-| Mercado Livre | `mercado-livre` | Amarelo (#fff159) |
-| Amazon | `amazon` | Laranja escuro (#ff9900) |
-
----
-
-## Adicionar Nova Loja
-
-1. No `style.css`, adicione uma nova variável e classe:
-
-```css
-:root {
-  --color-nova-loja: #cor-da-loja;
-}
-
-.link-btn.nova-loja {
-  border-left-color: var(--color-nova-loja);
-}
-
-.link-btn.nova-loja .link-icon {
-  color: var(--color-nova-loja);
-}
-```
-
-2. No `index.html`, use a nova classe no link:
-
-```html
-<a href="..." class="link-btn nova-loja">
-```
-
-3. Substitua o SVG no `<span class="link-icon">` pelo ícone da loja.
-
----
-
-## Publicar no GitHub Pages
-
-### Passo a passo
-
-1. **Crie um repositório** no GitHub (ex: `meus-links`)
-
-2. **Faça push** do código:
-   ```bash
-   git init
-   git add .
-   git commit -m "Página de links inicial"
-   git branch -M main
-   git remote add origin https://github.com/SEU_USUARIO/meus-links.git
-   git push -u origin main
+1. Adicione o logo em `assets/logos/novaloja.webp`
+2. No `style.css`, crie a classe:
+   ```css
+   .link-btn.nova-loja { border-left-color: #cor; }
+   .link-btn.nova-loja .link-icon { background-color: var(--color-background); }
    ```
-
-3. **Ative o GitHub Pages:**
-   - Vá em **Settings** → **Pages**
-   - Em "Source", selecione **Deploy from a branch**
-   - Selecione o branch `main` e pasta `/ (root)`
-   - Clique em **Save**
-
-4. **Acesse** em: `https://SEU_USUARIO.github.io/meus-links`
-
----
-
-## Domínio Customizado (Opcional)
-
-Para usar um domínio próprio (ex: `links.seusite.com`):
-
-1. Crie um arquivo `CNAME` na raiz do projeto com o domínio:
-   ```
-   links.seusite.com
-   ```
-
-2. No seu provedor de DNS, adicione um registro CNAME apontando para `SEU_USUARIO.github.io`
-
-3. Nas configurações do GitHub Pages, adicione o domínio customizado
+3. No `scripts/build.js`, adicione a plataforma no `PLATFORM_MAP`
+4. No Notion, adicione a opção na propriedade "Plataforma"
 
 ---
 
@@ -232,32 +122,57 @@ Para usar um domínio próprio (ex: `links.seusite.com`):
 
 ```
 meus-links/
-├── index.html        ← Página principal (edite seus links aqui)
-├── style.css         ← Estilos (edite cores e visual aqui)
+├── index.html              ← Gerado automaticamente (não editar manualmente)
+├── style.css               ← Estilos visuais
+├── package.json            ← Dependências do build
+├── scripts/
+│   └── build.js            ← Script que gera index.html a partir do Notion
 ├── assets/
-│   ├── logo.jpeg     ← Sua foto/logo (substitua)
-│   └── logos/        ← Logos das lojas
+│   ├── logo.jpeg           ← Avatar do perfil
+│   └── logos/              ← Logos das lojas
 │       ├── amazon.webp
 │       ├── mercadolivre.webp
 │       └── shopee.webp
-├── .gitignore        ← Arquivos ignorados pelo git
-├── CNAME             ← (opcional) Domínio customizado
-└── README.md         ← Este arquivo
+├── .github/
+│   └── workflows/
+│       └── build.yml       ← GitHub Action (cron + manual)
+├── .gitignore
+└── README.md               ← Este arquivo
 ```
 
 ---
 
-## Requisitos Técnicos
+## Lojas Suportadas
 
-- Sem JavaScript
-- Sem frameworks ou bibliotecas
-- Única dependência externa: Google Fonts (Inter) — pode ser removida
-- Tamanho total < 100KB
-- Mobile-first e responsivo
-- Acessível (suporte a prefers-reduced-motion, foco visível)
+| Loja | Classe CSS | Logo |
+|------|-----------|------|
+| Shopee | `shopee` | `assets/logos/shopee.webp` |
+| Mercado Livre | `mercado-livre` | `assets/logos/mercadolivre.webp` |
+| Amazon | `amazon` | `assets/logos/amazon.webp` |
+
+---
+
+## Stack Técnica
+
+- HTML5 + CSS3 (página final sem JS obrigatório, apenas busca client-side)
+- Node.js + @notionhq/client (build)
+- GitHub Actions (CI/CD)
+- GitHub Pages (hospedagem gratuita)
+- Notion (backoffice / gestão de produtos)
+- Google Fonts (Inter)
+
+---
+
+## Publicar no GitHub Pages
+
+1. Crie o repositório `SEU_USUARIO.github.io` no GitHub
+2. Faça push do código
+3. Em **Settings → Pages**, selecione branch `main`, pasta `/ (root)`
+4. Configure os secrets (NOTION_API_TOKEN e NOTION_DATABASE_ID)
+5. Acesse em `https://SEU_USUARIO.github.io`
 
 ---
 
 ## Licença
 
-Livre para uso pessoal e comercial. Faça o que quiser com o código.
+Livre para uso pessoal e comercial.
