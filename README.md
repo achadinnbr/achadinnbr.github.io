@@ -6,6 +6,35 @@ Página estática, rápida e responsiva para divulgar links de produtos de e-com
 
 ---
 
+## Como Rodar Localmente
+
+Como é um projeto 100% estático, basta abrir o arquivo no navegador:
+
+### Opção 1: Abrir direto no navegador
+
+```bash
+# No terminal, dentro da pasta do projeto:
+start index.html
+```
+
+Ou simplesmente dê dois cliques no `index.html` no Explorer.
+
+### Opção 2: Live Server (VS Code)
+
+1. Instale a extensão [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+2. Clique com botão direito no `index.html` → **Open with Live Server**
+3. Pronto! Qualquer alteração salva atualiza automaticamente no navegador.
+
+### Opção 3: Servidor local com Python
+
+```bash
+python -m http.server 8080
+```
+
+Acesse em `http://localhost:8080`
+
+---
+
 ## Como Usar
 
 1. Clone ou faça fork deste repositório
@@ -167,7 +196,11 @@ meus-links/
 ├── index.html        ← Página principal (edite seus links aqui)
 ├── style.css         ← Estilos (edite cores e visual aqui)
 ├── assets/
-│   └── avatar.svg    ← Sua foto/logo (substitua)
+│   ├── logo.jpeg     ← Sua foto/logo (substitua)
+│   └── logos/        ← Logos das lojas
+│       ├── amazon.webp
+│       ├── mercadolivre.webp
+│       └── shopee.webp
 ├── .gitignore        ← Arquivos ignorados pelo git
 ├── CNAME             ← (opcional) Domínio customizado
 └── README.md         ← Este arquivo
