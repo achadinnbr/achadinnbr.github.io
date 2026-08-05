@@ -154,7 +154,7 @@ ${linksHtml}
     </section>
 
     <footer class="footer">
-      <p>Feito com ❤️</p>
+      <p>Achadin BR &copy; 2026 &bull; Todos os links verificados</p>
     </footer>
 
   </div>
