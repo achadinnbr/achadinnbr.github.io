@@ -207,6 +207,10 @@ body {
   background-color: var(--color-background);
 }
 
+.link-btn.shopee .link-icon img {
+  transform: scale(1.4);
+}
+
 .link-btn.mercado-livre .link-icon {
   background-color: var(--color-background);
 }
