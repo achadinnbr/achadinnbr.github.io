@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meus Links - Ofertas e Produtos</title>
+  <title>Achadin BR - Ofertas e Produtos</title>
   <meta name="description" content="Encontre as melhores ofertas de produtos na Shopee, Mercado Livre e Amazon. Links diretos para as melhores promoções!">
   
   <!-- Open Graph -->
-  <meta property="og:title" content="Meus Links - Ofertas e Produtos">
+  <meta property="og:title" content="Achadin BR - Ofertas e Produtos">
   <meta property="og:description" content="Links diretos para as melhores ofertas em Shopee, Mercado Livre e Amazon.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/logo.jpeg">
   
-  <!-- Favicon SVG -->
+  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔗</text></svg>">
   
   <!-- Google Fonts - Inter -->
@@ -25,21 +25,13 @@
 <body>
   <div class="container">
     
-    <!-- ========== CABEÇALHO ========== -->
-    <!-- Para trocar a foto/logo: substitua o arquivo assets/avatar.svg ou mude o src abaixo -->
     <header class="header">
       <img src="assets/logo.jpeg" alt="Achadin BR" class="avatar" width="96" height="96">
-      <!-- ↓ NOME DA PÁGINA: edite o texto abaixo para mudar o título ↓ -->
       <h1 class="brand-name">Achadin BR</h1>
-      <!-- ↓ @ DO INSTAGRAM ↓ -->
       <a href="https://instagram.com/achadinn_br" target="_blank" rel="noopener noreferrer" class="brand-handle">@achadinn_br</a>
-      <!-- ↓ DESCRIÇÃO: edite o texto abaixo para mudar a bio ↓ -->
       <p class="brand-description">As melhores ofertas de produtos selecionados para você!</p>
     </header>
-    <!-- ================================ -->
 
-    <!-- ========== BUSCADOR ========== -->
-    <!-- O campo abaixo filtra os links em tempo real pelo código ou nome -->
     <div class="search-box">
       <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <circle cx="11" cy="11" r="8"/>
@@ -47,85 +39,52 @@
       </svg>
       <input type="text" id="search" class="search-input" placeholder="Buscar por código ou nome..." aria-label="Buscar links">
     </div>
-    <!-- =============================== -->
 
-    <!-- ========== SEUS LINKS AQUI ========== -->
-    <!--
-      COMO ADICIONAR UM NOVO LINK:
-      1. Copie um bloco <a>...</a> abaixo
-      2. Cole antes do comentário "FIM DOS LINKS"
-      3. Troque:
-         - href="..."        → coloque a URL do produto
-         - class="link-btn X" → troque X pela loja: shopee, mercado-livre ou amazon
-         - <span class="link-text">...</span> → coloque o nome do produto (inclua um código tipo #001 para facilitar a busca)
-
-      COMO REMOVER UM LINK:
-      - Delete o bloco <a>...</a> inteiro do link que quer remover
-    -->
     <section class="links" aria-label="Links de produtos">
       
-      <!-- SHOPEE -->
       <a href="https://s.shopee.com.br/7KvnZVeV2k" target="_blank" rel="noopener noreferrer" class="link-btn shopee">
-        <!-- ↑ href: coloque a URL do produto aqui ↑ -->
         <span class="link-icon">
           <img src="assets/logos/shopee.webp" alt="Shopee" width="24" height="24">
         </span>
-        <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
-        <span class="link-text">#001 - Cera Spray Automotiva Vonixx</span>
+        <span class="link-text">#001 - Cera Spray Vonixx</span>
       </a>
 
       <a href="https://s.shopee.com.br" target="_blank" rel="noopener noreferrer" class="link-btn shopee">
-        <!-- ↑ href: coloque a URL do produto aqui ↑ -->
         <span class="link-icon">
           <img src="assets/logos/shopee.webp" alt="Shopee" width="24" height="24">
         </span>
-        <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
         <span class="link-text">#002 - Carregador Portátil 20000mAh</span>
       </a>
 
-      <!-- MERCADO LIVRE -->
       <a href="https://mercadolivre.com.br" target="_blank" rel="noopener noreferrer" class="link-btn mercado-livre">
-        <!-- ↑ href: coloque a URL do produto aqui ↑ -->
         <span class="link-icon">
           <img src="assets/logos/mercadolivre.webp" alt="Mercado Livre" width="24" height="24">
         </span>
-        <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
-        <span class="link-text">#003 - Smart TV 50" 4K UHD</span>
+        <span class="link-text">#003 - Smart TV 50&quot; 4K UHD</span>
       </a>
 
       <a href="https://mercadolivre.com.br" target="_blank" rel="noopener noreferrer" class="link-btn mercado-livre">
-        <!-- ↑ href: coloque a URL do produto aqui ↑ -->
         <span class="link-icon">
           <img src="assets/logos/mercadolivre.webp" alt="Mercado Livre" width="24" height="24">
         </span>
-        <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
         <span class="link-text">#004 - Aspirador Robô com Mapeamento</span>
       </a>
 
-      <!-- AMAZON -->
       <a href="https://amazon.com.br" target="_blank" rel="noopener noreferrer" class="link-btn amazon">
-        <!-- ↑ href: coloque a URL do produto aqui ↑ -->
         <span class="link-icon">
           <img src="assets/logos/amazon.webp" alt="Amazon" width="24" height="24">
         </span>
-        <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
         <span class="link-text">#005 - Kindle Paperwhite 11ª Geração</span>
       </a>
 
       <a href="https://amazon.com.br" target="_blank" rel="noopener noreferrer" class="link-btn amazon">
-        <!-- ↑ href: coloque a URL do produto aqui ↑ -->
         <span class="link-icon">
           <img src="assets/logos/amazon.webp" alt="Amazon" width="24" height="24">
         </span>
-        <!-- ↓ NOME DO PRODUTO: edite o texto abaixo ↓ -->
         <span class="link-text">#006 - Echo Dot 5ª Geração com Alexa</span>
       </a>
 
-      <!-- ========== FIM DOS LINKS ========== -->
-      <!-- Para adicionar mais links, copie um bloco <a>...</a> acima e cole aqui em cima -->
-      
     </section>
-    <!-- ===================================== -->
 
     <footer class="footer">
       <p>Feito com ❤️</p>
@@ -133,8 +92,6 @@
 
   </div>
 
-  <!-- ========== SCRIPT DE BUSCA ========== -->
-  <!-- Filtra os links em tempo real conforme o usuário digita -->
   <script>
     document.getElementById('search').addEventListener('input', function () {
       var termo = this.value.toLowerCase();
@@ -145,6 +102,5 @@
       });
     });
   </script>
-  <!-- ====================================== -->
 </body>
 </html>

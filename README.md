@@ -2,7 +2,46 @@
 
 Página estática, rápida e responsiva para divulgar links de produtos de e-commerce (Shopee, Mercado Livre, Amazon).
 
-**Zero JavaScript. Zero dependências. 100% HTML + CSS.**
+**Geração automática a partir do Notion. Edite pelo celular, a página atualiza sozinha.**
+
+---
+
+## Como Funciona
+
+1. Você cadastra/edita produtos na **Tabela de Produtos** no Notion (funciona pelo app do celular)
+2. O GitHub Actions roda o script de build automaticamente (a cada 1h ou manualmente)
+3. O script consulta a API do Notion, filtra produtos com status "Publicado" e gera o `index.html`
+4. A página no GitHub Pages é atualizada
+
+---
+
+## Automação (Notion → GitHub Pages)
+
+### Configurar Secrets no GitHub
+
+No repositório, vá em **Settings → Secrets and variables → Actions** e adicione:
+
+| Secret | Valor |
+|--------|-------|
+| `NOTION_API_TOKEN` | Seu token da integração Notion |
+| `NOTION_DATABASE_ID` | `3b2ed71f-e785-805e-b1f0-daa161ac46d0` |
+
+### Disparar o build
+
+- **Automático:** roda a cada 1 hora via cron
+- **Manual:** vá em **Actions → Build from Notion → Run workflow**
+
+### Rodar localmente
+
+```bash
+npm install
+NOTION_API_TOKEN=seu_token NOTION_DATABASE_ID=seu_db_id npm run build
+```
+
+No PowerShell:
+```powershell
+$env:NOTION_API_TOKEN="seu_token"; $env:NOTION_DATABASE_ID="seu_db_id"; npm run build
+```
 
 ---
 

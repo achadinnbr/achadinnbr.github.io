@@ -1,0 +1,12 @@
+{
+  "name": "meus-links",
+  "version": "1.0.0",
+  "description": "Página de links de afiliados gerada automaticamente a partir do Notion",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.js"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15"
+  }
+}

@@ -13,3 +13,9 @@ Desktop.ini
 
 # Kiro
 .kiro/
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
