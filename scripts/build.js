@@ -135,7 +135,10 @@ function renderPage(products) {
     <header class="header">
       <img src="assets/logo.jpeg" alt="Achadin BR" class="avatar" width="96" height="96">
       <h1 class="brand-name">Achadin BR</h1>
-      <a href="https://instagram.com/achadinn_br" target="_blank" rel="noopener noreferrer" class="brand-handle">@achadinn_br</a>
+      <div class="brand-handle-wrapper">
+        <img src="assets/logos/instagram.webp" alt="Instagram" width="30" height="30" class="brand-handle-icon">
+        <a href="https://instagram.com/achadinn_br" target="_blank" rel="noopener noreferrer" class="brand-handle">@achadinn_br</a>
+      </div>
       <p class="brand-description">As melhores ofertas de produtos selecionados para você!</p>
     </header>
 
