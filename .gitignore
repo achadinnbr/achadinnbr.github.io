@@ -11,8 +11,9 @@ Desktop.ini
 .vscode/
 .idea/
 
-# Kiro
-.kiro/
+# Kiro (manter agents versionado)
+.kiro/*
+!.kiro/agents/
 
 # Dependencies
 node_modules/
