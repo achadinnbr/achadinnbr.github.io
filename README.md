@@ -21,30 +21,42 @@ O projeto inclui um **agente Kiro customizado** que automatiza o cadastro de pro
 
 ### Como usar
 
-1. No Kiro, selecione o agente **"Achadin Afiliados"** no seletor de agentes
-2. Envie comandos pelo chat:
+1. No Kiro, selecione o agente **"Achadin Afiliados"** no seletor de agentes (dropdown ao lado de "Default")
+2. Envie comandos pelo chat
 
-#### Cadastro simples:
+### Comandos disponíveis
+
+#### 1. Cadastro simples
 ```
 https://s.shopee.com.br/abc123 - Fone Bluetooth QCY - R$ 45,90 - Tecnologia
 ```
+O agente cadastra o produto no Notion com o próximo código sequencial.
 
-#### Gerar conteúdo para um produto existente:
-```
-Gera conteúdo pro produto #001 Cera Vonixx
-```
-
-#### Fluxo completo (cadastro + copy + imagem):
+#### 2. Fluxo completo (cadastro + copy + prompt de imagem)
 ```
 https://amzn.to/xyz789 - Echo Dot 5 - R$ 299 - Tecnologia - faz tudo
 ```
+Cadastra o produto E gera todo o material de divulgação.
 
-#### Apenas imagem:
+#### 3. Gerar conteúdo para produto existente
 ```
-Gera uma imagem pro #005 Kindle no formato carrossel
+Gera conteúdo pro produto #001 Cera Vonixx
+```
+Gera copy + prompt de imagem para um produto já cadastrado.
+
+#### 4. Com imagens do produto (recomendado!)
+Anexe fotos do produto no chat + escreva:
+```
+[fotos anexadas] Gera conteúdo pro #008 Kit Cera Blend
+```
+O agente gera um prompt de imagem que referencia as fotos para usar no Gemini web.
+
+#### 5. Apenas prompt de imagem
+```
+[foto anexada] Gera um prompt pra story desse produto
 ```
 
-### O que o agente faz automaticamente:
+### O que o agente faz automaticamente
 
 | Ação | Descrição |
 |------|-----------|
@@ -52,8 +64,29 @@ Gera uma imagem pro #005 Kindle no formato carrossel
 | Atribui código | Descobre o próximo código sequencial (#008, #009...) |
 | Cadastra no Notion | Cria item na Tabela de Produtos com status "Publicado" |
 | Gera copy | Texto otimizado para Reels, Story e Post com CTA e hashtags |
-| Gera imagem | Imagem promocional via Gemini AI (9:16 para Story, 1:1 para Post) |
-| Salva no Notion | Armazena copy + link da imagem na database "Conteúdo Instagram" |
+| Gera prompt de imagem | Prompt pronto pra colar no Gemini web com suas fotos |
+| Salva no Notion | Armazena copy + prompt na database "Conteúdo Instagram" |
+
+---
+
+## Fluxo de Geração de Imagem
+
+O agente **não gera a imagem diretamente** (limitação de quota da API). Ao invés disso, ele gera um **prompt otimizado** para você usar no Gemini web (gemini.google.com) com sua assinatura Plus.
+
+### Passo a passo:
+
+1. **No Kiro**: mande o link + fotos do produto para o agente
+2. **Agente retorna**: copy + prompt de imagem formatado
+3. **No Gemini web** (gemini.google.com): cole o prompt + as mesmas fotos do produto
+4. **Resultado**: imagem promocional pronta para postar no Instagram
+5. **No Notion**: o prompt fica salvo no campo "Prompt Imagem" para referência futura
+
+### Dica: O prompt já vem personalizado com:
+- Nome e preço do produto
+- Estilo visual adequado à categoria (automotivo, tech, casa)
+- Cores da plataforma (Shopee laranja, ML amarelo, Amazon laranja/preto)
+- Texto para sobrepor na imagem (hook + CTA)
+- Formato correto (9:16 para Story, 1:1 para Post)
 
 ---
 
@@ -74,8 +107,8 @@ Catálogo principal — alimenta o site.
 | Categoria | select | Automotivo / Casa & Organização / Tecnologia |
 | Status | select | Publicado / Aguardando Vídeo / Pronto para Postar |
 
-### 2. Conteúdo Instagram
-Conteúdo gerado pelo agente — copy, imagens e controle de publicação.
+### 2. Conteúdo Instagram (NOVO)
+Conteúdo gerado pelo agente — copy, prompt de imagem e controle de publicação.
 
 | Campo | Tipo | Descrição |
 |-------|------|-----------|
@@ -85,27 +118,18 @@ Conteúdo gerado pelo agente — copy, imagens e controle de publicação.
 | Plataforma | select | Shopee / Mercado Livre / Amazon |
 | Codigo Produto | rich_text | Referência ao produto (#XXX) |
 | Copy | rich_text | Texto da divulgação |
+| Prompt Imagem | rich_text | Prompt otimizado para gerar imagem no Gemini web |
 | Palavra-Chave Direct | rich_text | Palavra para o seguidor mandar no DM |
 | Link do Produto | url | Link de afiliado |
-| URL da Imagem | url | Link público da imagem gerada |
-| Data de Publicacao | date | Quando postar |
-
-### 3. Calendário de Conteúdo
-Pipeline de produção de vídeos (fluxo manual).
-
-| Campo | Tipo | Descrição |
-|-------|------|-----------|
-| Nome | title | "Reels #001 - Cera Vonixx" |
-| Status | status | Ideia → Baixando Vídeos → Editando CapCut → Gerando Voz IA → Agendado/Postado |
-| Link do Produto | url | Link de afiliado |
-| Palavra-Chave Direct | rich_text | Palavra para DM |
+| URL da Imagem | url | Link da imagem final (após gerar no Gemini) |
 | Data de Publicação | date | Quando postar |
+
+### 3. Calendário de Conteúdo (legado)
+Pipeline de produção de vídeos — uso manual, não recebe novos itens do agente.
 
 ---
 
 ## Gerenciar Produtos (via Notion)
-
-Toda gestão é feita pela **Tabela de Produtos** no Notion:
 
 | Ação | Como fazer |
 |------|-----------|
@@ -116,45 +140,6 @@ Toda gestão é feita pela **Tabela de Produtos** no Notion:
 | Deletar permanente | Delete a linha da tabela |
 
 Após editar, [dispare o build manualmente](https://github.com/achadinnbr/achadinnbr.github.io/actions/workflows/build.yml) ou aguarde o cron (a cada 1h).
-
----
-
-## Geração de Imagens (Gemini AI)
-
-O agente gera imagens promocionais usando a API do Google Gemini via MCP server.
-
-### Configuração do MCP Server
-
-O MCP server `media-pipeline` precisa estar configurado no Kiro. Adicione ao arquivo `~/.kiro/settings/mcp.json`:
-
-```json
-"media-pipeline": {
-  "command": "node",
-  "args": [
-    "c:/projects/sandbox/claude-image-gen/mcp-server/build/bundle.js"
-  ],
-  "env": {
-    "GEMINI_API_KEY": "<SUA_API_KEY>",
-    "GEMINI_DEFAULT_MODEL": "gemini-2.0-flash-preview-image-generation",
-    "IMAGE_PROVIDER": "gemini",
-    "IMAGE_OUTPUT_DIR": "c:/projects/sandbox/meus-links/generated-images"
-  },
-  "disabled": false
-}
-```
-
-### Como obter a API Key do Gemini
-
-1. Acesse [aistudio.google.com/apikey](https://aistudio.google.com/apikey)
-2. Faça login com sua conta Google
-3. Clique em "Create API Key"
-4. Copie a chave e coloque no `mcp.json`
-
-### Onde ficam as imagens
-
-- **Local**: `generated-images/` na raiz do projeto
-- **Público**: `https://achadinnbr.github.io/generated-images/[nome-arquivo]`
-- As imagens são commitadas no repositório e servidas pelo GitHub Pages
 
 ---
 
@@ -182,6 +167,7 @@ Em **Settings → Secrets and variables → Actions**:
 
 - Node.js 20+
 - npm
+- Kiro IDE (para usar o agente)
 
 ### Instalar dependências
 
@@ -191,22 +177,61 @@ npm install
 
 ### Gerar a página a partir do Notion
 
-```bash
-# Linux / Mac
-NOTION_API_TOKEN=seu_token NOTION_DATABASE_ID=seu_db_id npm run build
-```
-
 ```powershell
 # PowerShell (Windows)
 $env:NOTION_API_TOKEN="seu_token"; $env:NOTION_DATABASE_ID="seu_db_id"; npm run build
 ```
 
+```bash
+# Linux / Mac
+NOTION_API_TOKEN=seu_token NOTION_DATABASE_ID=seu_db_id npm run build
+```
+
 ### Visualizar no navegador
 
-Abra o `index.html` direto no navegador, use Live Server no VS Code, ou:
+Abra o `index.html` direto no navegador ou use Live Server no VS Code.
 
-```bash
-python -m http.server 8080
+---
+
+## Fluxo Completo de Trabalho
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  VOCÊ                                                           │
+│  Cola link + nome + preço + fotos no chat do agente             │
+└────────────────────────┬────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  AGENTE ACHADIN (Kiro)                                          │
+│  1. Detecta plataforma pelo link                                │
+│  2. Gera código sequencial (#XXX)                               │
+│  3. Cadastra na Tabela de Produtos → site atualiza em 1h        │
+│  4. Gera copy (Reels + Post) com CTA e hashtags                 │
+│  5. Gera prompt otimizado para imagem                           │
+│  6. Salva tudo na database "Conteúdo Instagram"                 │
+└────────────────────────┬────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  VOCÊ NO GEMINI WEB (gemini.google.com)                         │
+│  1. Cola o prompt gerado pelo agente                            │
+│  2. Anexa as mesmas fotos do produto                            │
+│  3. Gera a imagem promocional                                   │
+│  4. Baixa e posta no Instagram                                  │
+└────────────────────────┬────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  NOTION                                                         │
+│  Mude status de "Rascunho" → "Publicado" após postar            │
+└────────────────────────┬────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  GITHUB ACTIONS (automático a cada 1h)                          │
+│  Build → Gera index.html → Deploy no GitHub Pages               │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -219,12 +244,12 @@ Edite as variáveis CSS no início do `style.css`:
 
 ```css
 :root {
-  --color-primary: #a78bfa;       /* Cor principal */
-  --color-background: #1a1a2e;    /* Fundo da página */
-  --color-card: #16213e;          /* Fundo dos botões */
-  --color-shopee: #ee4d2d;        /* Cor da Shopee */
-  --color-mercado-livre: #fff159; /* Cor do Mercado Livre */
-  --color-amazon: #ff9900;        /* Cor da Amazon */
+  --color-primary: #a78bfa;
+  --color-background: #1a1a2e;
+  --color-card: #16213e;
+  --color-shopee: #ee4d2d;
+  --color-mercado-livre: #fff159;
+  --color-amazon: #ff9900;
 }
 ```
 
@@ -235,11 +260,7 @@ Substitua o arquivo `assets/logo.jpeg` por sua imagem (quadrada, mínimo 192x192
 ### Adicionar nova loja
 
 1. Adicione o logo em `assets/logos/novaloja.webp`
-2. No `style.css`, crie a classe:
-   ```css
-   .link-btn.nova-loja { border-left-color: #cor; }
-   .link-btn.nova-loja .link-icon { background-color: var(--color-background); }
-   ```
+2. No `style.css`, crie a classe `.link-btn.nova-loja`
 3. No `scripts/build.js`, adicione a plataforma no `PLATFORM_MAP`
 4. No Notion, adicione a opção na propriedade "Plataforma"
 
@@ -257,11 +278,7 @@ meus-links/
 ├── assets/
 │   ├── logo.jpeg           ← Avatar do perfil
 │   └── logos/              ← Logos das lojas
-│       ├── amazon.webp
-│       ├── instagram.webp
-│       ├── mercadolivre.webp
-│       └── shopee.webp
-├── generated-images/       ← Imagens geradas pelo agente (Gemini AI)
+├── generated-images/       ← Imagens geradas (quando via API)
 ├── .kiro/
 │   └── agents/
 │       └── achadin-afiliados.md  ← Agente IA customizado
@@ -274,59 +291,15 @@ meus-links/
 
 ---
 
-## Fluxo Completo de Trabalho
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│  VOCÊ                                                           │
-│  Cola link + nome + preço no chat do agente                     │
-└────────────────────────┬────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  AGENTE ACHADIN                                                 │
-│  1. Detecta plataforma                                          │
-│  2. Gera código (#XXX)                                          │
-│  3. Cadastra na Tabela de Produtos (Notion)                     │
-│  4. Gera copy para Instagram                                    │
-│  5. Gera imagem promocional (Gemini AI)                         │
-│  6. Salva tudo na database "Conteúdo Instagram" (Notion)        │
-└────────────────────────┬────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  VOCÊ                                                           │
-│  Revisa no Notion → Aprova → Posta no Instagram                 │
-└────────────────────────┬────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  GITHUB ACTIONS (automático a cada 1h)                          │
-│  Build → Gera index.html → Deploy no GitHub Pages               │
-└─────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## Lojas Suportadas
-
-| Loja | Classe CSS | Logo |
-|------|-----------|------|
-| Shopee | `shopee` | `assets/logos/shopee.webp` |
-| Mercado Livre | `mercado-livre` | `assets/logos/mercadolivre.webp` |
-| Amazon | `amazon` | `assets/logos/amazon.webp` |
-
----
-
 ## Stack Técnica
 
-- HTML5 + CSS3 (página final sem JS obrigatório, apenas busca client-side)
+- HTML5 + CSS3 (página final, apenas busca client-side)
 - Node.js + @notionhq/client (build)
 - GitHub Actions (CI/CD)
 - GitHub Pages (hospedagem gratuita)
-- Notion (backoffice / gestão de produtos + conteúdo)
-- Google Gemini AI (geração de imagens via media-pipeline MCP)
-- Kiro IDE + Agente customizado (automação de cadastro e conteúdo)
+- Notion (backoffice: produtos + conteúdo Instagram)
+- Google Gemini web (geração de imagens via prompt)
+- Kiro IDE + Agente customizado (automação)
 - Google Fonts (Inter)
 
 ---
