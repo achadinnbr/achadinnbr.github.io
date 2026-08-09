@@ -96,7 +96,7 @@ Achei essa oferta absurda na [plataforma] e não podia deixar passar:
 ✅ [Benefício 2]
 
 Corre que esse preço não dura! 🏃‍♂️
-Manda "[PALAVRA-CHAVE]" no direct que eu mando o link! 📩
+Manda "LINK" no direct que eu mando o link! 📩
 
 #oferta #desconto #promoção #[plataforma] #achados
 ```
@@ -120,7 +120,7 @@ Testei e o resultado foi [adjetivo positivo]:
 
 Por R$ [preço] na [plataforma] — vale cada centavo.
 
-Quer o link? Manda "[PALAVRA-CHAVE]" no direct! 📩
+Quer o link? Manda "LINK" no direct! 📩
 
 #[categoria] #dica #recomendação #achados #[plataforma]
 ```
@@ -139,7 +139,7 @@ Todo mundo tá comprando isso e eu fui descobrir por quê 👀
 
 E o melhor: tá custando só R$ [preço] na [plataforma]!
 
-Manda "[PALAVRA-CHAVE]" no direct que eu mando o link 📩
+Manda "LINK" no direct que eu mando o link 📩
 Salva pra não perder! 🔖
 
 #trend #viral #achados #[categoria] #[plataforma]
@@ -149,7 +149,7 @@ Salva pra não perder! 🔖
 Fundo limpo, produto em destaque com estética sofisticada, aspecto "desejável".
 
 #### Regras de geração:
-- A **PALAVRA-CHAVE** é a mesma nas 3 variações (curta, 1-2 palavras em CAPS)
+- A **PALAVRA-CHAVE** é sempre **LINK** (fixa para todos os produtos — direciona pro site com todas as ofertas)
 - Adapte a linguagem à categoria mas mantenha tom brasileiro informal
 - Se o preço não foi informado, omita valores mas mantenha a abordagem
 - Cada variação deve funcionar independente — o usuário pode postar 1, 2 ou as 3
@@ -208,7 +208,7 @@ Crie um item no database `3b6ed71f-e785-81fa-99a5-c528016b6335` com:
 | Codigo Produto | rich_text: #XXX |
 | Copy | rich_text: texto da copy gerada (versão Reels) |
 | Prompt Imagem | rich_text: os 3 prompts gerados (separados por ---) |
-| Palavra-Chave Direct | rich_text: PALAVRA-CHAVE |
+| Palavra-Chave Direct | rich_text: "LINK" (fixa — direciona pro site achadinnbr.github.io) |
 | Link do Produto | url: link de afiliado |
 
 ### Passo 4 — Apresentar resultado ao usuário
