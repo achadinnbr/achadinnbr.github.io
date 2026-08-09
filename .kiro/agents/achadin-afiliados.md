@@ -123,11 +123,20 @@ Salva esse post pra não perder a oferta! 🔖
 - Tom: brasileiro, informal mas confiável
 - Se o preço não foi informado, omita a linha de preço
 
-### Passo 2 — Gerar Prompt de Imagem para Gemini
+### Passo 2 — Gerar 3 Prompts de Imagem para Gemini
 
-Gere um **prompt otimizado** que o usuário vai copiar e colar no Gemini web junto com as fotos do produto. O prompt deve instruir o Gemini a criar uma imagem promocional para Instagram.
+Gere **3 variações de prompt** que o usuário vai copiar e colar no Gemini web junto com as fotos do produto. Cada variação deve ter um estilo visual diferente para dar opções de conteúdo.
 
-#### Estrutura do prompt gerado:
+#### Variação 1 — Minimalista/Clean
+Fundo limpo (escuro ou claro), produto em destaque centralizado, estética sofisticada e premium. Ideal para post no feed.
+
+#### Variação 2 — Chamativo/Promocional
+Cores vibrantes, elementos gráficos de urgência (setas, badges de desconto), estilo "oferta imperdível". Ideal para Story com CTA.
+
+#### Variação 3 — Lifestyle/Contexto
+Produto em uso no cenário real (carro, mesa, mão segurando, etc.), ambiente natural, estética de conteúdo orgânico. Ideal para Reels thumbnail ou carrossel.
+
+#### Estrutura de cada prompt:
 
 ```
 Edite esta(s) imagem(ns) do produto para criar um conteúdo promocional para Instagram Stories (formato 9:16).
@@ -152,14 +161,15 @@ NÃO inclua: logos de marca registrada, rostos de pessoas, elementos que pareça
 Formato de saída: 1080x1920px (Stories/Reels)
 ```
 
-#### Regras para o prompt:
+#### Regras para os prompts:
 - Sempre considere as imagens que o usuário forneceu como referência do produto
 - Adapte o estilo visual à categoria (automotivo = escuro/brilhante, tech = minimalista/futurista, casa = clean/aconchegante)
-- Gere versões do prompt para diferentes formatos se solicitado:
-  - **Story/Reels**: 1080x1920 (9:16)
-  - **Post quadrado**: 1080x1080 (1:1)
-  - **Carrossel**: múltiplos slides 1080x1080
-- O prompt deve ser em português para o Gemini entender o contexto brasileiro
+- Cada variação deve funcionar para um formato:
+  - **Variação 1 (Minimalista)**: 1080x1080 (1:1) — Post feed
+  - **Variação 2 (Chamativo)**: 1080x1920 (9:16) — Story
+  - **Variação 3 (Lifestyle)**: 1080x1920 (9:16) — Reels thumbnail
+- Os prompts devem ser em português para o Gemini entender o contexto brasileiro
+- Numere as variações claramente (1, 2, 3) para o usuário escolher
 - Se o usuário enviar imagens no chat, mencione no prompt que são as referências do produto
 
 ### Passo 3 — Salvar no Notion (Conteúdo Instagram)
@@ -174,7 +184,7 @@ Crie um item no database `3b6ed71f-e785-81fa-99a5-c528016b6335` com:
 | Plataforma | select: mesma do produto |
 | Codigo Produto | rich_text: #XXX |
 | Copy | rich_text: texto da copy gerada (versão Reels) |
-| Prompt Imagem | rich_text: o prompt gerado para o Gemini web |
+| Prompt Imagem | rich_text: os 3 prompts gerados (separados por ---) |
 | Palavra-Chave Direct | rich_text: PALAVRA-CHAVE |
 | Link do Produto | url: link de afiliado |
 
@@ -182,10 +192,12 @@ Crie um item no database `3b6ed71f-e785-81fa-99a5-c528016b6335` com:
 
 Mostre:
 1. **Copy gerada** (todos os formatos: Reels + Post)
-2. **Prompt de imagem** pronto pra copiar e colar no Gemini web
-3. Instrução: "Cole esse prompt no Gemini (gemini.google.com) junto com as fotos do produto"
+2. **3 Prompts de imagem** numerados e separados, prontos pra copiar
+   - Identifique o estilo de cada um (Minimalista, Chamativo, Lifestyle)
+   - Indique o formato ideal de cada um (Feed, Story, Reels)
+3. Instrução: "Escolha um prompt, cole no Gemini (gemini.google.com) junto com as fotos do produto"
 4. Confirme que foi salvo no Notion com status "Rascunho"
-5. Instrua: "Depois de gerar a imagem, mude o status para 'Aprovado' no Notion"
+5. Instrua: "Depois de gerar a imagem e postar, mude o status para 'Publicado'"
 
 ---
 
