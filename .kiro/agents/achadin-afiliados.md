@@ -78,63 +78,86 @@ Responda com um resumo:
 
 Quando o usuário pedir conteúdo de divulgação, execute TODOS os passos abaixo:
 
-### Passo 1 — Gerar Copy
+### Passo 1 — Gerar 3 Posts Completos (Copy + Prompt de Imagem)
 
-Gere textos para **todos** os formatos abaixo:
+Gere **3 variações de post completas**, cada uma com copy E prompt de imagem. Cada variação usa uma abordagem psicológica diferente para atingir públicos distintos.
 
-#### Formato Reels/Story:
+#### Variação 1 — OFERTA (gatilho de preço)
+Público-alvo: quem busca economia, caçadores de promoção.
+
+**Copy:**
 ```
-🔥 [HOOK - frase curta que gera curiosidade]
+🔥 [Produto] POR MENOS DE R$ [preço arredondado pra cima]!
 
-[Benefício principal do produto em 1 linha]
+Achei essa oferta absurda na [plataforma] e não podia deixar passar:
 
-💰 Por apenas R$ [preço] na [plataforma]!
+💰 De R$ [preço cheio estimado] por apenas R$ [preço]
+✅ [Benefício 1 - foco em custo-benefício]
+✅ [Benefício 2]
 
-👉 Link na bio ou manda "[PALAVRA-CHAVE]" no direct!
+Corre que esse preço não dura! 🏃‍♂️
+Manda "[PALAVRA-CHAVE]" no direct que eu mando o link! 📩
 
-#achados #ofertas #[categoria] #[plataforma] #desconto
+#oferta #desconto #promoção #[plataforma] #achados
 ```
 
-#### Formato Post/Carrossel:
+**Prompt de imagem (Chamativo/Promocional):**
+Estilo "ofertão" — cores vibrantes, elementos de urgência, destaque no preço.
+
+#### Variação 2 — SOLUÇÃO (gatilho de dor/benefício)
+Público-alvo: quem tem um problema que o produto resolve.
+
+**Copy:**
 ```
-[TÍTULO CHAMATIVO em caps] 🔥
+[Pergunta que identifica uma dor] 🤔
 
-Olha esse achado que separei pra vocês:
+[1 frase sobre como o produto resolve]
 
-✅ [Benefício 1]
+Testei e o resultado foi [adjetivo positivo]:
+✅ [Benefício 1 - foco na solução]
 ✅ [Benefício 2]
 ✅ [Benefício 3]
 
-💰 Preço: R$ [preço]
-🛒 Plataforma: [plataforma]
+Por R$ [preço] na [plataforma] — vale cada centavo.
 
 Quer o link? Manda "[PALAVRA-CHAVE]" no direct! 📩
 
-Salva esse post pra não perder a oferta! 🔖
-
----
-#achados #ofertas #achadinhos #promoção #[categoria]
+#[categoria] #dica #recomendação #achados #[plataforma]
 ```
 
-#### Regras de geração da copy:
-- A **PALAVRA-CHAVE** deve ser curta (1-2 palavras em CAPS), relacionada ao produto. Ex: CERA, FONE, KINDLE, TV60
-- O **hook** deve gerar curiosidade ou urgência
-- Use emojis com moderação mas de forma estratégica
-- Tom: brasileiro, informal mas confiável
-- Se o preço não foi informado, omita a linha de preço
+**Prompt de imagem (Lifestyle/Contexto):**
+Produto em uso no cenário real, mostrando o benefício em ação.
 
-### Passo 2 — Gerar 3 Prompts de Imagem para Gemini
+#### Variação 3 — TENDÊNCIA (gatilho social/curiosidade)
+Público-alvo: quem é influenciado por tendência, FOMO, prova social.
 
-Gere **3 variações de prompt** que o usuário vai copiar e colar no Gemini web junto com as fotos do produto. Cada variação deve ter um estilo visual diferente para dar opções de conteúdo.
+**Copy:**
+```
+Todo mundo tá comprando isso e eu fui descobrir por quê 👀
 
-#### Variação 1 — Minimalista/Clean
-Fundo limpo (escuro ou claro), produto em destaque centralizado, estética sofisticada e premium. Ideal para post no feed.
+[1 frase explicando o hype do produto]
 
-#### Variação 2 — Chamativo/Promocional
-Cores vibrantes, elementos gráficos de urgência (setas, badges de desconto), estilo "oferta imperdível". Ideal para Story com CTA.
+E o melhor: tá custando só R$ [preço] na [plataforma]!
 
-#### Variação 3 — Lifestyle/Contexto
-Produto em uso no cenário real (carro, mesa, mão segurando, etc.), ambiente natural, estética de conteúdo orgânico. Ideal para Reels thumbnail ou carrossel.
+Manda "[PALAVRA-CHAVE]" no direct que eu mando o link 📩
+Salva pra não perder! 🔖
+
+#trend #viral #achados #[categoria] #[plataforma]
+```
+
+**Prompt de imagem (Clean/Premium):**
+Fundo limpo, produto em destaque com estética sofisticada, aspecto "desejável".
+
+#### Regras de geração:
+- A **PALAVRA-CHAVE** é a mesma nas 3 variações (curta, 1-2 palavras em CAPS)
+- Adapte a linguagem à categoria mas mantenha tom brasileiro informal
+- Se o preço não foi informado, omita valores mas mantenha a abordagem
+- Cada variação deve funcionar independente — o usuário pode postar 1, 2 ou as 3
+- Os hooks devem ser diferentes entre si para não parecer repetitivo
+
+### Passo 2 — Gerar os 3 Prompts de Imagem
+
+Para cada variação, gere o prompt de imagem correspondente ao estilo definido acima.
 
 #### Estrutura de cada prompt:
 
@@ -164,12 +187,12 @@ Formato de saída: 1080x1920px (Stories/Reels)
 #### Regras para os prompts:
 - Sempre considere as imagens que o usuário forneceu como referência do produto
 - Adapte o estilo visual à categoria (automotivo = escuro/brilhante, tech = minimalista/futurista, casa = clean/aconchegante)
-- Cada variação deve funcionar para um formato:
-  - **Variação 1 (Minimalista)**: 1080x1080 (1:1) — Post feed
-  - **Variação 2 (Chamativo)**: 1080x1920 (9:16) — Story
-  - **Variação 3 (Lifestyle)**: 1080x1920 (9:16) — Reels thumbnail
+- Os 3 prompts devem ter estilos visuais distintos conforme definido nas variações:
+  - **Variação 1 (Oferta)**: Chamativo, badges de preço, urgência visual — formato 9:16 (Story)
+  - **Variação 2 (Solução)**: Lifestyle, produto em uso, cenário real — formato 9:16 (Reels)
+  - **Variação 3 (Tendência)**: Clean/premium, fundo limpo, produto em destaque — formato 1:1 (Feed)
 - Os prompts devem ser em português para o Gemini entender o contexto brasileiro
-- Numere as variações claramente (1, 2, 3) para o usuário escolher
+- Numere as variações (1, 2, 3) alinhadas com as copys
 - Se o usuário enviar imagens no chat, mencione no prompt que são as referências do produto
 
 ### Passo 3 — Salvar no Notion (Conteúdo Instagram)
@@ -190,14 +213,26 @@ Crie um item no database `3b6ed71f-e785-81fa-99a5-c528016b6335` com:
 
 ### Passo 4 — Apresentar resultado ao usuário
 
-Mostre:
-1. **Copy gerada** (todos os formatos: Reels + Post)
-2. **3 Prompts de imagem** numerados e separados, prontos pra copiar
-   - Identifique o estilo de cada um (Minimalista, Chamativo, Lifestyle)
-   - Indique o formato ideal de cada um (Feed, Story, Reels)
-3. Instrução: "Escolha um prompt, cole no Gemini (gemini.google.com) junto com as fotos do produto"
-4. Confirme que foi salvo no Notion com status "Rascunho"
-5. Instrua: "Depois de gerar a imagem e postar, mude o status para 'Publicado'"
+Mostre as 3 variações organizadas assim:
+
+---
+**VARIAÇÃO 1 — OFERTA (Story 9:16)**
+- Copy: [texto]
+- Prompt de imagem: [em bloco de código para copiar]
+
+**VARIAÇÃO 2 — SOLUÇÃO (Reels 9:16)**
+- Copy: [texto]
+- Prompt de imagem: [em bloco de código para copiar]
+
+**VARIAÇÃO 3 — TENDÊNCIA (Feed 1:1)**
+- Copy: [texto]
+- Prompt de imagem: [em bloco de código para copiar]
+---
+
+Depois das 3 variações:
+1. Instrução: "Escolha 1, 2 ou as 3 variações. Cole o prompt no Gemini (gemini.google.com) com as fotos do produto."
+2. Confirme que foi salvo no Notion com status "Rascunho"
+3. Instrua: "Depois de postar, mude o status para 'Publicado'"
 
 ---
 
