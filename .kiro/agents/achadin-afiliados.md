@@ -111,6 +111,7 @@ Achei essa oferta absurda na [plataforma] e não podia deixar passar:
 
 Corre que esse preço não dura! 🏃‍♂️
 Manda "LINK" no direct que eu mando o link! 📩
+🔎 Busca pelo código #[XXX] no site.
 
 #oferta #desconto #promoção #[plataforma] #achados
 ```
@@ -135,6 +136,7 @@ Testei e o resultado foi [adjetivo positivo]:
 Por R$ [preço] na [plataforma] — vale cada centavo.
 
 Quer o link? Manda "LINK" no direct! 📩
+🔎 Busca pelo código #[XXX] no site.
 
 #[categoria] #dica #recomendação #achados #[plataforma]
 ```
@@ -154,6 +156,7 @@ Todo mundo tá comprando isso e eu fui descobrir por quê 👀
 E o melhor: tá custando só R$ [preço] na [plataforma]!
 
 Manda "LINK" no direct que eu mando o link 📩
+🔎 Busca pelo código #[XXX] no site.
 Salva pra não perder! 🔖
 
 #trend #viral #achados #[categoria] #[plataforma]
@@ -207,6 +210,7 @@ Formato de saída: 1080x1920px (Stories/Reels)
   - **Variação 3 (Tendência)**: Clean/premium, fundo limpo, produto em destaque — formato 1:1 (Feed)
 - Os prompts devem ser em português para o Gemini entender o contexto brasileiro
 - Numere as variações (1, 2, 3) alinhadas com as copys
+- Inclua o código do produto (#XXX) no texto da imagem quando aplicável (ex: "#008" no canto da imagem)
 - Se o usuário enviar imagens no chat, mencione no prompt que são as referências do produto
 
 ### Passo 3 — Salvar no Notion (Conteúdo Instagram)
