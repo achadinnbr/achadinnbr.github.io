@@ -21,15 +21,15 @@ Guia passo a passo para criar, configurar e operar seu canal de ofertas no Whats
 
 **Resposta curta: NÃO é obrigatório, mas é recomendado.**
 
-| | WhatsApp Normal | WhatsApp Business |
-|---|---|---|
-| Criar canal | Sim | Sim |
-| Postar ofertas | Sim | Sim |
-| Perfil profissional | Não | Sim (endereço, site, catálogo) |
-| Respostas automáticas | Não | Sim |
-| Etiquetas de contatos | Não | Sim |
-| Métricas do canal | Básicas | Básicas (iguais) |
-| Custo | Grátis | Grátis |
+|                       | WhatsApp Normal |        WhatsApp Business       |
+|-----------------------|-----------------|--------------------------------|
+| Criar canal           |       Sim       |               Sim              |
+| Postar ofertas        |       Sim       |               Sim              |
+| Perfil profissional   |       Não       | Sim (endereço, site, catálogo) |
+| Respostas automáticas |       Não       |               Sim              |
+| Etiquetas de contatos |       Não       |               Sim              |
+| Métricas do canal     |     Básicas     |         Básicas (iguais)       |
+| Custo                 |      Grátis     |              Grátis            |
 
 **Recomendação:** Use o **WhatsApp Business** (app gratuito). Vantagens:
 
@@ -77,25 +77,25 @@ Qualquer pessoa pode encontrá-lo na busca do WhatsApp e seguir.
 
 Após criar, vá nas configurações do canal e preencha:
 
-| Campo | O que colocar |
-|-------|---------------|
-| Nome | Achadin BR - Ofertas |
-| Foto | Logo do projeto (assets/logo.jpeg) |
+|   Campo   |          O que colocar               |
+|-----------|--------------------------------------|
+| Nome      | Achadin BR - Ofertas                 |
+| Foto      | Logo do projeto (assets/logo.jpeg)   |
 | Descrição | Texto acima com Instagram e proposta |
-| Categoria | Compras (ou Negócios) |
+| Categoria | Compras (ou Negócios)                |
 
 ### Se estiver usando WhatsApp Business:
 
 Vá em **Configurações → Perfil comercial** e preencha:
 
-| Campo | O que colocar |
-|-------|---------------|
-| Endereço | Pode deixar vazio |
-| Categoria | Compras e Varejo |
-| Site | https://SEU_USUARIO.github.io (seu GitHub Pages) |
-| Instagram | @achadinn_br |
-| Horário | Sempre disponível |
-| Mensagem de ausência | Desativada |
+| Campo                   | O que colocar                                                                                       |
+|-------------------------|-----------------------------------------------------------------------------------------------------|
+| Endereço                | Pode deixar vazio                                                                                   |
+| Categoria               | Compras e Varejo                                                                                    |
+| Site                    | https://SEU_USUARIO.github.io (seu GitHub Pages)                                                    |
+| Instagram               | @achadinn_br                                                                                        |
+| Horário                 | Sempre disponível                                                                                   |
+| Mensagem de ausência    | Desativada                                                                                          |
 | Mensagem de boas-vindas | "Bem-vindo! Aqui você encontra as melhores ofertas do dia. Reaja com emoji nas ofertas que gostar!" |
 
 ---
@@ -204,26 +204,26 @@ Poste entre **5-10 ofertas por dia**, distribuídas ao longo do dia:
 
 ### Frequência ideal
 
-| Dia | Posts | Horários |
-|-----|-------|----------|
-| Seg-Sex | 5-8 | 8h, 12h, 15h, 19h, 21h |
-| Sábado | 8-10 | Manhã e tarde (dia de compras) |
-| Domingo | 3-5 | Noite (planejamento da semana) |
+| Dia     | Posts | Horários                        |
+|---------|-------|---------------------------------|
+| Seg-Sex | 5-8   | 8h, 12h, 15h, 19h, 21h         |
+| Sábado  | 8-10  | Manhã e tarde (dia de compras)  |
+| Domingo | 3-5   | Noite (planejamento da semana)  |
 
 ---
 
 ## 7. Erros Comuns (evite isso)
 
-| Erro | Por quê é ruim | O que fazer |
-|------|---------------|-------------|
-| Postar 30+ ofertas/dia | Seguidores silenciam o canal | Máximo 10, foque em qualidade |
-| Não verificar preço | Perde credibilidade | Sempre abra o link antes |
-| Copiar copy de outro canal | Parece genérico | Use nosso gerador (tem 4 estilos) |
-| Só Amazon | Limita seu público | Misture Shopee + ML + Amazon |
-| Não postar foto | Menos cliques | Sempre inclua imagem do produto |
-| Postar link quebrado | Perde comissão e confiança | Teste o link antes de postar |
-| Ignorar horários | Menos visualizações | Poste nos horários de pico |
-| Nunca interagir | Canal "morto" | Poste enquetes, pergunte opinião às vezes |
+| Erro                      | Por quê é ruim                   | O que fazer                                      |
+|---------------------------|----------------------------------|--------------------------------------------------|
+| Postar 30+ ofertas/dia    | Seguidores silenciam o canal     | Máximo 10, foque em qualidade                    |
+| Não verificar preço       | Perde credibilidade              | Sempre abra o link antes                         |
+| Copiar copy de outro canal| Parece genérico                  | Use nosso gerador (tem 4 estilos)                |
+| Só Amazon                 | Limita seu público               | Misture Shopee + ML + Amazon                     |
+| Não postar foto           | Menos cliques                    | Sempre inclua imagem do produto                  |
+| Postar link quebrado      | Perde comissão e confiança       | Teste o link antes de postar                     |
+| Ignorar horários          | Menos visualizações              | Poste nos horários de pico                       |
+| Nunca interagir           | Canal "morto"                    | Poste enquetes, pergunte opinião às vezes        |
 
 ---
 

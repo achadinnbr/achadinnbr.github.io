@@ -58,20 +58,20 @@ O agente gera um prompt de imagem que referencia as fotos para usar no Gemini we
 
 ### O que o agente faz automaticamente
 
-| Ação | Descrição |
-|------|-----------|
-| Detecta plataforma | Identifica Shopee/ML/Amazon pelo domínio do link |
-| Atribui código | Descobre o próximo código sequencial (#008, #009...) |
-| Verifica duplicatas | Checa se produto já existe antes de cadastrar |
-| Cadastra no Notion | Cria item na Tabela de Produtos com status "Publicado" |
-| Gera 3 variações de copy | Oferta, Solução e Tendência com CTAs diferenciados |
-| Aplica compliance | Inclui #publi em toda copy (obrigatório) |
-| Hook de curiosidade | Nunca revela nome/marca na primeira linha |
-| Prova social | Usa nota/avaliações quando disponíveis |
-| Gera prompt de imagem | Com identidade visual Achadin BR (dark + laranja/amarelo) |
-| Salva no Notion | Armazena copy + prompt na database "Conteúdo Instagram" |
-| Alerta preço expirado | Avisa quando preço tem mais de 7 dias |
-| Sugere cadência | Recomenda gerar mais conteúdo quando rascunhos estão baixos |
+| Ação                    | Descrição                                                      |
+|-------------------------|----------------------------------------------------------------|
+| Detecta plataforma      | Identifica Shopee/ML/Amazon pelo domínio do link               |
+| Atribui código          | Descobre o próximo código sequencial (#008, #009...)            |
+| Verifica duplicatas     | Checa se produto já existe antes de cadastrar                  |
+| Cadastra no Notion      | Cria item na Tabela de Produtos com status "Publicado"         |
+| Gera 3 variações de copy| Oferta, Solução e Tendência com CTAs diferenciados             |
+| Aplica compliance       | Inclui #publi em toda copy (obrigatório)                       |
+| Hook de curiosidade     | Nunca revela nome/marca na primeira linha                      |
+| Prova social            | Usa nota/avaliações quando disponíveis                         |
+| Gera prompt de imagem   | Com identidade visual Achadin BR (dark + laranja/amarelo)      |
+| Salva no Notion         | Armazena copy + prompt na database "Conteúdo Instagram"        |
+| Alerta preço expirado   | Avisa quando preço tem mais de 7 dias                          |
+| Sugere cadência         | Recomenda gerar mais conteúdo quando rascunhos estão baixos    |
 
 ---
 
@@ -122,22 +122,22 @@ node scripts/gerar-post-whatsapp.js "https://produto.mercadolivre.com.br/MLB-123
 
 ### Parâmetros
 
-| Parâmetro | Obrigatório | Descrição |
-|-----------|:-----------:|-----------|
-| `<URL>` | Sim | Link do produto (primeiro argumento) |
-| `--nome` | Sim | Nome do produto |
-| `--preco` | Não | Preço em reais (ex: 45.90) |
-| `--categoria` | Não | Tecnologia, Casa & Organização, Automotivo, Beleza, Moda, Esportes |
-| `--template` | Não | oferta, urgencia, recomendacao, preco, todos (padrão: todos) |
+| Parâmetro    | Obrigatório | Descrição                                                          |
+|--------------|:-----------:|--------------------------------------------------------------------|
+| `<URL>`      |     Sim     | Link do produto (primeiro argumento)                               |
+| `--nome`     |     Sim     | Nome do produto                                                    |
+| `--preco`    |     Não     | Preço em reais (ex: 45.90)                                         |
+| `--categoria`|     Não     | Tecnologia, Casa & Organização, Automotivo, Beleza, Moda, Esportes |
+| `--template` |     Não     | oferta, urgencia, recomendacao, preco, todos (padrão: todos)       |
 
 ### Templates disponíveis
 
-| Template | Estilo | Quando usar |
-|----------|--------|-------------|
-| `oferta` | Direto e objetivo | Ofertas do dia-a-dia |
-| `urgencia` | Escassez/FOMO | Promoções relâmpago, estoque limitado |
-| `recomendacao` | Tom pessoal | Produtos que você realmente testou |
-| `preco` | Destaca o valor | Quando o preço é o grande diferencial |
+| Template       | Estilo             | Quando usar                           |
+|----------------|--------------------|---------------------------------------|
+| `oferta`       | Direto e objetivo  | Ofertas do dia-a-dia                  |
+| `urgencia`     | Escassez/FOMO      | Promoções relâmpago, estoque limitado |
+| `recomendacao` | Tom pessoal        | Produtos que você realmente testou    |
+| `preco`        | Destaca o valor    | Quando o preço é o grande diferencial |
 
 ### Configurar suas tags de afiliado
 
@@ -166,11 +166,11 @@ const AFFILIATE_TAGS = {
 
 ### Arquitetura dos scripts
 
-| Arquivo | Responsabilidade |
-|---------|-----------------|
-| `scripts/link-converter.js` | Detecta plataforma, extrai ID do produto, reconstrói com tag |
-| `scripts/whatsapp-copy.js` | Gera copy formatada para WhatsApp (4 templates) |
-| `scripts/gerar-post-whatsapp.js` | Script principal — orquestra os dois acima |
+| Arquivo                          | Responsabilidade                                            |
+|----------------------------------|-------------------------------------------------------------|
+| `scripts/link-converter.js`      | Detecta plataforma, extrai ID do produto, reconstrói com tag|
+| `scripts/whatsapp-copy.js`       | Gera copy formatada para WhatsApp (4 templates)             |
+| `scripts/gerar-post-whatsapp.js` | Script principal — orquestra os dois acima                  |
 
 Cada script também funciona individualmente:
 
@@ -193,35 +193,35 @@ O projeto usa 3 databases:
 ### 1. Tabela de Produtos
 Catálogo principal — alimenta o site.
 
-| Campo | Tipo | Descrição |
-|-------|------|-----------|
-| Nome do Produto | title | Nome completo (controle interno — site exibe versão genérica) |
-| Código | rich_text | #001, #002... (ordena os links) |
-| Plataforma | select | Shopee / Mercado Livre / Amazon |
-| Link de Afiliado | url | Link real do produto |
-| Preço | number (R$) | Preço do produto |
-| Categoria | select | Automotivo, Bebê, Beleza, Casa & Org., Cozinha, Eletrônicos, Ferramentas, Fitness, Moda, Papelaria, Pet, Tecnologia |
-| Nota | number | Nota do produto na plataforma (ex: 4.8) |
-| Nº Avaliações | number | Quantidade de avaliações |
-| Status | select | Publicado / Aguardando Vídeo / Pronto para Postar |
+| Campo           | Tipo       | Descrição                                                                                                             |
+|-----------------|------------|-----------------------------------------------------------------------------------------------------------------------|
+| Nome do Produto | title      | Nome completo (controle interno — site exibe versão genérica)                                                         |
+| Código          | rich_text  | #001, #002... (ordena os links)                                                                                   |
+| Plataforma      | select     | Shopee / Mercado Livre / Amazon                                                                                       |
+| Link de Afiliado| url        | Link real do produto                                                                                                  |
+| Preço           | number (R$)| Preço do produto                                                                                                      |
+| Categoria       | select     | Automotivo, Bebê, Beleza, Casa & Org., Cozinha, Eletrônicos, Ferramentas, Fitness, Moda, Papelaria, Pet, Tecnologia   |
+| Nota            | number     | Nota do produto na plataforma (ex: 4.8)                                                                               |
+| Nº Avaliações   | number     | Quantidade de avaliações                                                                                              |
+| Status          | select     | Publicado / Aguardando Vídeo / Pronto para Postar                                                                     |
 
 ### 2. Conteúdo Instagram
 Conteúdo gerado pelo agente — copy, prompt de imagem e controle de publicação.
 
-| Campo | Tipo | Descrição |
-|-------|------|-----------|
-| Nome | title | "Post #008 - Fone QCY" |
-| Tipo | select | Reels / Story / Carrossel / Post |
-| Status | select | Rascunho / Aprovado / Publicado |
-| Plataforma | select | Shopee / Mercado Livre / Amazon |
-| Codigo Produto | rich_text | Referência ao produto (#XXX) |
-| Copy | rich_text | Texto da divulgação (com #publi obrigatório) |
-| Prompt Imagem | rich_text | Prompt otimizado com identidade visual Achadin BR |
-| Palavra-Chave Direct | rich_text | "LINK" (fixa — automação responde via DM) |
-| Link do Produto | url | Link de afiliado |
-| URL da Imagem | url | Link da imagem final (após gerar no Gemini) |
-| Performance | select | Pendente / Baixa / Média / Alta |
-| Data de Publicação | date | Quando postar |
+| Campo                | Tipo      | Descrição                                          |
+|----------------------|-----------|----------------------------------------------------|
+| Nome                 | title     | "Post #008 - Fone QCY"                             |
+| Tipo                 | select    | Reels / Story / Carrossel / Post                   |
+| Status               | select    | Rascunho / Aprovado / Publicado                    |
+| Plataforma           | select    | Shopee / Mercado Livre / Amazon                    |
+| Codigo Produto       | rich_text | Referência ao produto (#XXX)                       |
+| Copy                 | rich_text | Texto da divulgação (com #publi obrigatório)       |
+| Prompt Imagem        | rich_text | Prompt otimizado com identidade visual Achadin BR  |
+| Palavra-Chave Direct | rich_text | "LINK" (fixa — automação responde via DM)          |
+| Link do Produto      | url       | Link de afiliado                                   |
+| URL da Imagem        | url       | Link da imagem final (após gerar no Gemini)        |
+| Performance          | select    | Pendente / Baixa / Média / Alta                    |
+| Data de Publicação   | date      | Quando postar                                      |
 
 ### 3. Calendário de Conteúdo (legado)
 Pipeline de produção de vídeos — uso manual, não recebe novos itens do agente.
@@ -230,13 +230,13 @@ Pipeline de produção de vídeos — uso manual, não recebe novos itens do age
 
 ## Gerenciar Produtos (via Notion)
 
-| Ação | Como fazer |
-|------|-----------|
-| Adicionar produto | Use o agente OU crie uma linha com Código, Nome, Plataforma, Link e Status = "Publicado" |
-| Remover da página | Mude o Status para qualquer opção diferente de "Publicado" |
-| Alterar plataforma | Mude o campo "Plataforma" (Shopee, Mercado Livre, Amazon) |
-| Mudar ordem | Altere o campo "Código" (#001, #002...) — ordena ascendente |
-| Deletar permanente | Delete a linha da tabela |
+| Ação                | Como fazer                                                                                      |
+|---------------------|-------------------------------------------------------------------------------------------------|
+| Adicionar produto   | Use o agente OU crie uma linha com Código, Nome, Plataforma, Link e Status = "Publicado"        |
+| Remover da página   | Mude o Status para qualquer opção diferente de "Publicado"                                      |
+| Alterar plataforma  | Mude o campo "Plataforma" (Shopee, Mercado Livre, Amazon)                                       |
+| Mudar ordem         | Altere o campo "Código" (#001, #002...) — ordena ascendente                                     |
+| Deletar permanente  | Delete a linha da tabela                                                                        |
 
 Após editar, [dispare o build manualmente](https://github.com/achadinnbr/achadinnbr.github.io/actions/workflows/build.yml) ou aguarde o cron (a cada 1h).
 
@@ -248,10 +248,10 @@ Após editar, [dispare o build manualmente](https://github.com/achadinnbr/achadi
 
 Em **Settings → Secrets and variables → Actions**:
 
-| Secret | Descrição |
-|--------|-----------|
-| `NOTION_API_TOKEN` | Token da integração Notion |
-| `NOTION_DATABASE_ID` | ID da database "Tabela de Produtos" |
+| Secret             | Descrição                              |
+|--------------------|----------------------------------------|
+| `NOTION_API_TOKEN` | Token da integração Notion             |
+| `NOTION_DATABASE_ID` | ID da database "Tabela de Produtos"  |
 
 ### Disparar o build
 
