@@ -108,6 +108,15 @@ O perfil @achadinn_br utiliza **automação de comentários** (atualmente migran
 
 Todos os CTAs incluem backup: "ou busca pelo código #[XXX] no link da bio 🔗"
 
+**Palavras-chave configuradas no InfluenciaMax (lembrete operacional):**
+Além de `LINK` (padrão), configure no painel do InfluenciaMax as seguintes variações que seguidores costumam comentar:
+- `link`, `Link`, `LINK` (case variations)
+- `Eu quero`, `EU QUERO`, `Quero`
+- Código do produto: `#001`, `#002`, etc. (cada post)
+- `Me manda`, `Manda pra mim`
+
+Isso garante que mesmo quem não comenta exatamente "LINK" receba o link via DM.
+
 ---
 
 ## Comando: Cadastrar Produto
@@ -238,6 +247,8 @@ Salva esse post pra não perder! 🔖
 **Prompt de imagem (Lifestyle/Contexto):**
 Fundo dark com iluminação lateral azul/laranja. Produto em cenário de uso, estilo editorial moderno.
 
+**Dica para Reels/Vídeo:** Se for postar como Reels, use um áudio em alta (trending audio) e mantenha o hook de texto visível na tela nos primeiros 3 segundos — isso aumenta retenção e entrega do algoritmo.
+
 #### Variação 3 — TENDÊNCIA (gatilho social/FOMO)
 Público-alvo: quem é influenciado por tendência, curiosidade, prova social.
 
@@ -330,6 +341,8 @@ TEXTO NA IMAGEM (tipografia bold, sem serifa, moderna e legível):
 VARIAÇÃO DE ESTILO (adaptar conforme a variação):
 - [Inserir estilo específico da variação: Ofertão / Editorial / Premium]
 - [Adaptar elementos da categoria: ex. brilhos metálicos para Automotivo, glow neon para Tech]
+
+SAFE ZONE: Mantenha todos os textos e elementos visuais principais com margem de segurança de 10% nas bordas — Instagram corta bordas no preview do feed 1:1 e em thumbnails de Reels.
 
 NÃO inclua: logos de marcas registradas, rostos de pessoas, elementos que pareçam spam, cores da Shopee/ML/Amazon como tema principal.
 Formato de saída: [1080x1920px (9:16) para Story/Reels OU 1080x1080px (1:1) para Feed]
