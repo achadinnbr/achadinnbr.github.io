@@ -508,6 +508,30 @@ Estas são orientações para manter consistência no perfil (o algoritmo do Ins
 
 ---
 
+## Proteção contra Bypass de Link de Afiliado
+
+O site (achadinnbr.github.io) exibe os produtos com descrições **genéricas** para evitar que o cliente copie o nome e busque diretamente na loja, bypassando o link de afiliado.
+
+### Como funciona:
+- O build script (`scripts/build.js`) converte automaticamente o nome completo do produto em uma descrição curta e genérica
+- Remove marcas, modelos e especificações detalhadas
+- Formato no site: `#XXX - Descrição genérica (Categoria)`
+
+### Exemplos:
+| Nome no Notion (completo) | Exibição no site (genérica) |
+|--------------------------|----------------------------|
+| Kit Cera Blend Spray Black Vonixx Vitrificadora + 3 Toalhas Microfibra | #001 - Kit Cera Spray + Toalhas (Automotivo) |
+| Tênis Masculino Casual Broox Envio Imediato | #002 - Tênis Casual Masculino (Moda) |
+| Creatina 1kg Monohidratada 100% Pura - Soldiers Nutrition | #003 - Creatina 1kg (Suplemento) |
+
+### Regras para o agente:
+- O **Nome do Produto** no Notion pode (e deve) ser completo e descritivo — serve para controle interno
+- A proteção é feita automaticamente pelo build script — não precisa de campo extra
+- Na **copy do Instagram**, aplique a mesma lógica: NÃO use o nome exato/marca na primeira linha (regra de Hook de Curiosidade)
+- O site é apenas um intermediário — o cliente busca pelo código (#XXX) e clica no link de afiliado
+
+---
+
 ## Informações do projeto
 
 - **Site**: hospedado no GitHub Pages (achadinnbr.github.io)

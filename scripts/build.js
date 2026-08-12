@@ -45,6 +45,41 @@ function escapeHtml(text) {
     .replace(/"/g, '&quot;');
 }
 
+/**
+ * Gera uma descrição genérica do produto para exibir no site.
+ * Remove marcas, modelos e termos específicos que permitiriam
+ * ao cliente buscar o produto diretamente na loja sem usar o link de afiliado.
+ *
+ * Formato desejado: "Descrição curta genérica (Categoria)"
+ * Exemplo: "Kit Cera Spray + Toalhas (Automotivo)"
+ */
+function gerarDescricaoGenerica(nomeCompleto, categoria) {
+  // Remove termos comuns de marca/especificação
+  let desc = nomeCompleto
+    // Remove texto entre hífens que geralmente é marca (ex: "- Soldiers Nutrition")
+    .replace(/\s*-\s*[A-Z][a-zA-Zà-ú\s]+$/, '')
+    // Remove termos de especificação detalhada
+    .replace(/\b(Monohidratada|100%\s*Pura|Envio\s*Imediato|Black|Vitrificadora)\b/gi, '')
+    // Remove marcas conhecidas (adicionar conforme necessário)
+    .replace(/\b(Vonixx|Broox|Soldiers\s*Nutrition|Squeeze)\b/gi, '')
+    // Limpa espaços extras e hífens soltos
+    .replace(/\s{2,}/g, ' ')
+    .replace(/\s*[+\-]\s*$/, '')
+    .replace(/^\s*[+\-]\s*/, '')
+    .trim();
+
+  // Se a limpeza deixou muito curto, usa só a primeira parte do nome
+  if (desc.length < 5) {
+    desc = nomeCompleto.split(/\s*[-–]\s*/)[0].trim();
+  }
+
+  // Adiciona categoria entre parênteses se disponível
+  if (categoria) {
+    return `${desc} (${categoria})`;
+  }
+  return desc;
+}
+
 // --- Buscar produtos do Notion ---
 async function fetchProducts() {
   const results = [];
@@ -69,9 +104,18 @@ async function fetchProducts() {
 
   return results.map(page => {
     const props = page.properties;
+    const nome = getPlainText(props['Nome do Produto']?.title);
+    const categoria = props['Categoria']?.select?.name || '';
+
+    // Gera descrição genérica para o site (evita bypass do link de afiliado)
+    // Formato: descrição curta sem marca/modelo exato + categoria
+    const descricaoSite = gerarDescricaoGenerica(nome, categoria);
+
     return {
       codigo: getPlainText(props['Código']?.rich_text),
-      nome: getPlainText(props['Nome do Produto']?.title),
+      nome: nome,
+      descricaoSite: descricaoSite,
+      categoria: categoria,
       plataforma: props['Plataforma']?.select?.name || '',
       link: props['Link de Afiliado']?.url || '#',
     };
@@ -87,8 +131,8 @@ function renderLink(product) {
   }
 
   const displayName = product.codigo
-    ? `${product.codigo} - ${product.nome}`
-    : product.nome;
+    ? `${product.codigo} - ${product.descricaoSite}`
+    : product.descricaoSite;
 
   return `      <a href="${escapeHtml(product.link)}" target="_blank" rel="noopener noreferrer" class="link-btn ${platform.class}">
         <span class="link-icon">
