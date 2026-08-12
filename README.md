@@ -62,10 +62,16 @@ O agente gera um prompt de imagem que referencia as fotos para usar no Gemini we
 |------|-----------|
 | Detecta plataforma | Identifica Shopee/ML/Amazon pelo domínio do link |
 | Atribui código | Descobre o próximo código sequencial (#008, #009...) |
+| Verifica duplicatas | Checa se produto já existe antes de cadastrar |
 | Cadastra no Notion | Cria item na Tabela de Produtos com status "Publicado" |
-| Gera copy | Texto otimizado para Reels, Story e Post com CTA e hashtags |
-| Gera prompt de imagem | Prompt pronto pra colar no Gemini web com suas fotos |
+| Gera 3 variações de copy | Oferta, Solução e Tendência com CTAs diferenciados |
+| Aplica compliance | Inclui #publi em toda copy (obrigatório) |
+| Hook de curiosidade | Nunca revela nome/marca na primeira linha |
+| Prova social | Usa nota/avaliações quando disponíveis |
+| Gera prompt de imagem | Com identidade visual Achadin BR (dark + laranja/amarelo) |
 | Salva no Notion | Armazena copy + prompt na database "Conteúdo Instagram" |
+| Alerta preço expirado | Avisa quando preço tem mais de 7 dias |
+| Sugere cadência | Recomenda gerar mais conteúdo quando rascunhos estão baixos |
 
 ---
 
@@ -83,10 +89,100 @@ O agente **não gera a imagem diretamente** (limitação de quota da API). Ao in
 
 ### Dica: O prompt já vem personalizado com:
 - Nome e preço do produto
-- Estilo visual adequado à categoria (automotivo, tech, casa)
-- Cores da plataforma (Shopee laranja, ML amarelo, Amazon laranja/preto)
+- Estilo visual com identidade Achadin BR (dark + laranja/amarelo/azul royal)
+- Adaptação sutil por categoria (automotivo = metálico, tech = neon, casa = clean)
 - Texto para sobrepor na imagem (hook + CTA)
-- Formato correto (9:16 para Story, 1:1 para Post)
+- Formato correto (9:16 para Story/Reels, 1:1 para Feed)
+- Safe zone de 10% nas bordas (evita corte no feed)
+
+---
+
+## Gerador de Posts para WhatsApp
+
+Ferramenta CLI para gerar posts prontos para colar no seu canal/grupo do WhatsApp. O fluxo é simples: você copia um link de outro canal de ofertas, roda o script, e ele te devolve a copy formatada com o seu link de afiliado.
+
+### Como usar (comando rápido)
+
+```powershell
+node scripts/gerar-post-whatsapp.js "<URL>" --nome "Produto" --preco 99.90
+```
+
+### Exemplos práticos
+
+```powershell
+# Amazon - link copiado de outro canal
+node scripts/gerar-post-whatsapp.js "https://www.amazon.com.br/dp/B09ZZ4JL5B" --nome "Echo Dot 5" --preco 299
+
+# Shopee - link curto
+node scripts/gerar-post-whatsapp.js "https://s.shopee.com.br/9pRXfH5fAe" --nome "Fone QCY T13" --preco 45.90 --categoria Tecnologia
+
+# Mercado Livre - com template específico
+node scripts/gerar-post-whatsapp.js "https://produto.mercadolivre.com.br/MLB-12345" --nome "Cera Vonixx" --preco 32 --template urgencia
+```
+
+### Parâmetros
+
+| Parâmetro | Obrigatório | Descrição |
+|-----------|:-----------:|-----------|
+| `<URL>` | Sim | Link do produto (primeiro argumento) |
+| `--nome` | Sim | Nome do produto |
+| `--preco` | Não | Preço em reais (ex: 45.90) |
+| `--categoria` | Não | Tecnologia, Casa & Organização, Automotivo, Beleza, Moda, Esportes |
+| `--template` | Não | oferta, urgencia, recomendacao, preco, todos (padrão: todos) |
+
+### Templates disponíveis
+
+| Template | Estilo | Quando usar |
+|----------|--------|-------------|
+| `oferta` | Direto e objetivo | Ofertas do dia-a-dia |
+| `urgencia` | Escassez/FOMO | Promoções relâmpago, estoque limitado |
+| `recomendacao` | Tom pessoal | Produtos que você realmente testou |
+| `preco` | Destaca o valor | Quando o preço é o grande diferencial |
+
+### Configurar suas tags de afiliado
+
+Edite o arquivo `scripts/link-converter.js` e preencha suas tags:
+
+```javascript
+const AFFILIATE_TAGS = {
+  amazon: 'SUA-TAG-AQUI-20',   // Tag do Amazon Associates
+  shopee: '',                    // ID Shopee Afiliados (ver nota abaixo)
+  mercadolivre: '',              // ID ML Afiliados (ver nota abaixo)
+};
+```
+
+> **Nota sobre Shopee e Mercado Livre:** Essas plataformas usam links de redirecionamento gerados pelo painel de afiliados — não é possível construir o link só com uma "tag" na URL como a Amazon. O script detecta a plataforma e gera a copy, mas você precisa gerar o link de afiliado direto no painel ([Shopee Afiliados](https://affiliate.shopee.com.br) / [ML Afiliados](https://www.mercadolivre.com.br/afiliados)) e colar como URL.
+
+### Fluxo de uso no dia-a-dia
+
+```
+1. Você vê uma oferta boa em outro canal do WhatsApp
+2. Copia o link do produto
+3. Roda: node scripts/gerar-post-whatsapp.js "LINK" --nome "PRODUTO" --preco XX
+4. O script converte o link (Amazon) ou mantém o original (Shopee/ML)
+5. Gera copy formatada com *negrito*, emojis e CTA
+6. Você copia a copy e cola no SEU canal
+```
+
+### Arquitetura dos scripts
+
+| Arquivo | Responsabilidade |
+|---------|-----------------|
+| `scripts/link-converter.js` | Detecta plataforma, extrai ID do produto, reconstrói com tag |
+| `scripts/whatsapp-copy.js` | Gera copy formatada para WhatsApp (4 templates) |
+| `scripts/gerar-post-whatsapp.js` | Script principal — orquestra os dois acima |
+
+Cada script também funciona individualmente:
+
+```powershell
+# Só converter link
+node scripts/link-converter.js "https://www.amazon.com.br/dp/B09ZZ4JL5B"
+
+# Só gerar copy (quando já tem o link pronto)
+node scripts/whatsapp-copy.js --nome "Echo Dot" --preco 299 --link "https://amzn.to/xxx?tag=achadinnbr-20" --plataforma Amazon --template todos
+```
+
+> **Guia completo:** Veja o passo a passo de setup, boas práticas e fluxo diário em [`docs/GUIA-WHATSAPP-AFILIADOS.md`](docs/GUIA-WHATSAPP-AFILIADOS.md)
 
 ---
 
@@ -99,15 +195,17 @@ Catálogo principal — alimenta o site.
 
 | Campo | Tipo | Descrição |
 |-------|------|-----------|
-| Nome do Produto | title | Nome exibido no site |
+| Nome do Produto | title | Nome completo (controle interno — site exibe versão genérica) |
 | Código | rich_text | #001, #002... (ordena os links) |
 | Plataforma | select | Shopee / Mercado Livre / Amazon |
 | Link de Afiliado | url | Link real do produto |
 | Preço | number (R$) | Preço do produto |
-| Categoria | select | Automotivo / Casa & Organização / Tecnologia |
+| Categoria | select | Automotivo, Bebê, Beleza, Casa & Org., Cozinha, Eletrônicos, Ferramentas, Fitness, Moda, Papelaria, Pet, Tecnologia |
+| Nota | number | Nota do produto na plataforma (ex: 4.8) |
+| Nº Avaliações | number | Quantidade de avaliações |
 | Status | select | Publicado / Aguardando Vídeo / Pronto para Postar |
 
-### 2. Conteúdo Instagram (NOVO)
+### 2. Conteúdo Instagram
 Conteúdo gerado pelo agente — copy, prompt de imagem e controle de publicação.
 
 | Campo | Tipo | Descrição |
@@ -117,11 +215,12 @@ Conteúdo gerado pelo agente — copy, prompt de imagem e controle de publicaç�
 | Status | select | Rascunho / Aprovado / Publicado |
 | Plataforma | select | Shopee / Mercado Livre / Amazon |
 | Codigo Produto | rich_text | Referência ao produto (#XXX) |
-| Copy | rich_text | Texto da divulgação |
-| Prompt Imagem | rich_text | Prompt otimizado para gerar imagem no Gemini web |
-| Palavra-Chave Direct | rich_text | Palavra para o seguidor mandar no DM |
+| Copy | rich_text | Texto da divulgação (com #publi obrigatório) |
+| Prompt Imagem | rich_text | Prompt otimizado com identidade visual Achadin BR |
+| Palavra-Chave Direct | rich_text | "LINK" (fixa — automação responde via DM) |
 | Link do Produto | url | Link de afiliado |
 | URL da Imagem | url | Link da imagem final (após gerar no Gemini) |
+| Performance | select | Pendente / Baixa / Média / Alta |
 | Data de Publicação | date | Quando postar |
 
 ### 3. Calendário de Conteúdo (legado)
@@ -214,6 +313,15 @@ Abra o `index.html` direto no navegador ou use Live Server no VS Code.
                          │
                          ▼
 ┌─────────────────────────────────────────────────────────────────┐
+│  GERADOR WHATSAPP (CLI)                                         │
+│  1. Copia link de outro canal de ofertas                        │
+│  2. Roda: node scripts/gerar-post-whatsapp.js "URL" --nome ...  │
+│  3. Script converte link + gera copy formatada                  │
+│  4. Cola no seu canal WhatsApp                                  │
+└────────────────────────┬────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────────┐
 │  VOCÊ NO GEMINI WEB (gemini.google.com)                         │
 │  1. Cola o prompt gerado pelo agente                            │
 │  2. Anexa as mesmas fotos do produto                            │
@@ -274,7 +382,12 @@ meus-links/
 ├── style.css               ← Estilos visuais
 ├── package.json            ← Dependências do build
 ├── scripts/
-│   └── build.js            ← Script que gera index.html a partir do Notion
+│   ├── build.js            ← Script que gera index.html a partir do Notion
+│   ├── link-converter.js   ← Conversor de links de afiliado (Amazon/Shopee/ML)
+│   ├── whatsapp-copy.js    ← Gerador de copy formatada para WhatsApp
+│   └── gerar-post-whatsapp.js  ← CLI unificado (conversor + copy)
+├── docs/
+│   └── GUIA-WHATSAPP-AFILIADOS.md  ← Guia completo de setup e operação
 ├── assets/
 │   ├── logo.jpeg           ← Avatar do perfil
 │   └── logos/              ← Logos das lojas
@@ -300,7 +413,28 @@ meus-links/
 - Notion (backoffice: produtos + conteúdo Instagram)
 - Google Gemini web (geração de imagens via prompt)
 - Kiro IDE + Agente customizado (automação)
+- InfluenciaMax (automação de DM por comentário no Instagram)
 - Google Fonts (Inter)
+
+---
+
+## Estratégia Anti-Bypass
+
+O site exibe **descrições genéricas** dos produtos (sem marca/modelo exato) para evitar que o cliente copie o nome e busque diretamente na loja, bypassando o link de afiliado.
+
+- O `build.js` converte automaticamente o nome completo em descrição curta + categoria
+- Formato no site: `#XXX - Descrição genérica (Categoria)`
+- O nome completo no Notion serve apenas para controle interno
+
+### Jornada de conversão blindada:
+
+```
+Instagram (hook de curiosidade, sem nome)
+  → Comentário "LINK" (automação InfluenciaMax)
+    → DM com link para o site (achadinnbr.github.io)
+      → Site mostra só código + descrição genérica
+        → Clique no botão → Link de afiliado ativo
+```
 
 ---
 
