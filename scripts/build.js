@@ -47,33 +47,87 @@ function escapeHtml(text) {
 
 /**
  * Gera uma descrição genérica do produto para exibir no site.
- * Remove marcas, modelos e termos específicos que permitiriam
- * ao cliente buscar o produto diretamente na loja sem usar o link de afiliado.
+ * Usa truncamento inteligente: identifica o tipo do produto e descarta
+ * marca, modelo e specs para evitar que o cliente busque diretamente na loja.
  *
- * Formato desejado: "Descrição curta genérica (Categoria)"
- * Exemplo: "Kit Cera Spray + Toalhas (Automotivo)"
+ * Formato: "Descrição curta (Categoria)"
+ * Exemplos:
+ *   "Kit Cera Blend Spray Black Vonixx..." → "Kit Cera Spray (Automotivo)"
+ *   "Samsung Galaxy Buds Core, Fone de..." → "Fone de Ouvido (Tecnologia)"
+ *   "Bike Ergométrica 8kg Fitness com..." → "Bike Ergométrica (Fitness & Esporte)"
  */
 function gerarDescricaoGenerica(nomeCompleto, categoria) {
-  // Remove termos comuns de marca/especificação
-  let desc = nomeCompleto
-    // Remove texto entre hífens que geralmente é marca (ex: "- Soldiers Nutrition")
-    .replace(/\s*-\s*[A-Z][a-zA-Zà-ú\s]+$/, '')
-    // Remove termos de especificação detalhada
-    .replace(/\b(Monohidratada|100%\s*Pura|Envio\s*Imediato|Black|Vitrificadora)\b/gi, '')
-    // Remove marcas conhecidas (adicionar conforme necessário)
-    .replace(/\b(Vonixx|Broox|Soldiers\s*Nutrition|Squeeze)\b/gi, '')
-    // Limpa espaços extras e hífens soltos
-    .replace(/\s{2,}/g, ' ')
-    .replace(/\s*[+\-]\s*$/, '')
-    .replace(/^\s*[+\-]\s*/, '')
-    .trim();
+  // Passo 1: Separar por vírgulas, hífens ou pipes
+  const trechos = nomeCompleto.split(/\s*[,\-–|]\s*/);
 
-  // Se a limpeza deixou muito curto, usa só a primeira parte do nome
-  if (desc.length < 5) {
-    desc = nomeCompleto.split(/\s*[-–]\s*/)[0].trim();
+  // Passo 2: Encontrar o trecho mais genérico (tipo do produto)
+  const palavrasGenericas = /^(kit|fone|tênis|tenis|bike|bicicleta|cera|creatina|whey|luminária|luminaria|aspirador|panela|mochila|relógio|relogio|smartwatch|caixa|suporte|cabo|carregador|mouse|teclado|monitor|cadeira|mesa|tapete|escova|secador|fritadeira|air\s*fryer|smart\s*speaker|speaker|caixa\s*de\s*som)/i;
+
+  let descBase = trechos[0];
+  for (const trecho of trechos) {
+    const limpo = trecho.trim();
+    if (palavrasGenericas.test(limpo)) {
+      descBase = limpo;
+      break;
+    }
   }
 
-  // Adiciona categoria entre parênteses se disponível
+  // Passo 3: Pipeline de limpeza
+  let desc = descBase
+    // Remove marcas
+    .replace(/\b(Samsung|Apple|Xiaomi|JBL|QCY|Vonixx|Broox|Soldiers|Squeeze|Sony|LG|Philips|Mondial|Electrolux|Tramontina|Nike|Adidas|Puma|Galaxy|iPhone|Echo\s*Dot|Alexa|Google|Anker|Baseus|Logitech|Razer|HyperX|Buds|Core)\b/gi, '')
+    // Remove codes/modelos alfanuméricos (G502, B09ZZ4, T13)
+    .replace(/\b[A-Z]\d{2,}[A-Z0-9]*\b/g, '')
+    // Remove specs numéricas (8kg, 4.1L, 5000mah, 25600 DPI etc)
+    .replace(/\b\d+[\.,]?\d*\s*(kg|g|ml|l|w|watts|mah|gb|tb|mm|cm|pol|"|litros?|metros?|dpi)\b/gi, '')
+    // Remove "100%" especificamente
+    .replace(/100%/g, '')
+    // Remove números soltos no início
+    .replace(/^\d+\s+/g, '')
+    // Remove termos de marketing, specs e modelos
+    .replace(/\b(Pro|Max|Plus|Ultra|Premium|Original|Oficial|Genuíno|Importado|Nacional|Pura|Puro|Monohidratada|Vitrificadora|Blend|Digital|Inteligente|Hero|Turbo|Lite)\b/gi, '')
+    // Remove "com" + tudo depois
+    .replace(/\s+com\s+.*/i, '')
+    // Remove termos de entrega/versão
+    .replace(/\b(Envio\s*Imediato|Frete\s*Gr[aá]tis|Pronta\s*Entrega|Black|Edition|Geração|Microfibra)\b/gi, '')
+    // Remove tudo após "+" (complementos)
+    .replace(/\+.*/g, '')
+    // Limpa espaços e pontuação solta
+    .replace(/\s{2,}/g, ' ')
+    .replace(/^\s*[+\-,.\s]+/, '')
+    .replace(/[+\-,.\s]+\s*$/, '')
+    .trim();
+
+  // Passo 4: Limitar a 4 palavras (5 se termina com "sem fio", "sem ruído" etc)
+  const palavras = desc.split(/\s+/).filter(p => p.length > 0);
+  let maxPalavras = 4;
+  if (palavras.length > 4 && palavras[3] === 'sem') {
+    maxPalavras = 5; // mantém "sem fio", "sem ruído"
+  }
+  if (palavras.length > maxPalavras) {
+    desc = palavras.slice(0, maxPalavras).join(' ');
+  } else {
+    desc = palavras.join(' ');
+  }
+
+  // Remove números soltos que sobraram em qualquer posição
+  desc = desc.replace(/\b\d+\b/g, '').replace(/\s{2,}/g, ' ').trim();
+
+  // Passo 5: Fallback se ficou vazio ou muito curto
+  if (desc.length < 3) {
+    // Usa primeiras 3 palavras do nome, removendo marcas óbvias
+    const fallback = nomeCompleto
+      .replace(/\b(Samsung|Apple|Xiaomi|Galaxy|iPhone)\b/gi, '')
+      .trim()
+      .split(/\s+/)
+      .slice(0, 3)
+      .join(' ');
+    desc = fallback;
+  }
+
+  // Passo 6: Capitalizar
+  desc = desc.charAt(0).toUpperCase() + desc.slice(1);
+
   if (categoria) {
     return `${desc} (${categoria})`;
   }
